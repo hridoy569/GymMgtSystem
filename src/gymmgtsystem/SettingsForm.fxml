@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxWidth="1366.0" prefHeight="590.0" prefWidth="1366.0" stylesheets="@../style/winDec.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gymmgtsystem.SettingsFormController">
+   <children>
+      <AnchorPane layoutX="70.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox layoutX="271.0" layoutY="108.0" prefHeight="450.0" prefWidth="3.0" style="-fx-background-color: #ccc;" AnchorPane.leftAnchor="271.0" AnchorPane.topAnchor="80.0" />
+            <JFXButton layoutX="73.0" layoutY="155.0" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #01A5E1;" text="Business Profile" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </JFXButton>
+            <Pane layoutX="337.0" layoutY="73.0" prefHeight="425.0" prefWidth="842.0" style="-fx-background-color: #fff;">
+               <children>
+                  <Label layoutX="98.0" layoutY="171.0" text="Business Name" />
+                  <JFXTextField fx:id="bname" focusColor="#01a5e1" layoutX="273.0" layoutY="167.0" prefHeight="25.0" prefWidth="160.0" />
+                  <Label layoutX="98.0" layoutY="220.0" text="Address" />
+                  <Label layoutX="22.0" layoutY="6.0" text="Business Profile">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Line endX="350.0" fill="BLACK" layoutX="233.0" layoutY="33.0" scaleX="1.5" startX="-100.0" strokeMiterLimit="11.0" />
+                  <Label layoutX="98.0" layoutY="275.0" text="Phone" />
+                  <Label layoutX="98.0" layoutY="333.0" text="Email" />
+                  <JFXTextField fx:id="bphone" focusColor="#01a5e1" layoutX="273.0" layoutY="271.0" prefHeight="25.0" prefWidth="160.0" />
+                  <JFXTextField fx:id="baddress" focusColor="#01a5e1" layoutX="273.0" layoutY="216.0" prefHeight="25.0" prefWidth="160.0" />
+                  <JFXTextField fx:id="bemail" focusColor="#01a5e1" layoutX="273.0" layoutY="321.0" prefHeight="25.0" prefWidth="160.0" />
+                  <AnchorPane layoutX="240.0" layoutY="76.0">
+                     <children>
+                        <ImageView fitHeight="60.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/logo-bg.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="changeLogoView" fitHeight="60.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </AnchorPane>
+                  <Label layoutX="98.0" layoutY="98.0" text="Business Logo" />
+                  <JFXButton fx:id="updateBtn" layoutX="375.0" layoutY="375.0" onAction="#updateBtnAction" prefHeight="25.0" prefWidth="117.0" style="-fx-background-color: #01A5E1;" text="Update" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </Pane>
+            <JFXButton layoutX="73.0" layoutY="204.0" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #01A5E1;" text="Theme" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <VBox alignment="CENTER" prefHeight="590.0" prefWidth="70.0" style="-fx-background-color: #222;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <effect>
+            <DropShadow />
+         </effect>
+      </VBox>
+   </children>
+</AnchorPane>

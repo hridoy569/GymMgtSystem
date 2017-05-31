@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" maxWidth="1300.0" prefHeight="530.0" prefWidth="1300.0" style="-fx-background-color: #222;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gymmgtsystem.NewUserController">
+   <children>
+      <AnchorPane prefHeight="500.0" prefWidth="1300.0" style="-fx-background-color: #fff;" stylesheets="@../style/winDec.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+         <children>
+            <Pane layoutX="74.0" layoutY="14.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label layoutX="275.0" layoutY="139.0" text="User Name" />
+                  <JFXTextField fx:id="userName" focusColor="#01a5e1" layoutX="363.0" layoutY="137.0" prefHeight="25.0" prefWidth="220.0" promptText="User Name" />
+                  <Label layoutX="595.0" layoutY="22.0" text="User Details">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Line endX="700.0" fill="BLACK" layoutX="343.0" layoutY="67.0" scaleX="1.5" startX="-100.0" strokeMiterLimit="11.0" />
+                  <JFXButton fx:id="createUserBtn" layoutX="374.0" layoutY="343.0" onAction="#createUserBtnAction" prefHeight="30.0" prefWidth="199.0" style="-fx-background-color: #01A5E1;" text="Create User" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXComboBox fx:id="roleCmb" layoutX="374.0" layoutY="296.0" prefHeight="25.0" prefWidth="199.0" promptText="-- Select Role --" />
+                  <Label layoutX="275.0" layoutY="184.0" text="Full Name" />
+                  <JFXTextField fx:id="fullName" focusColor="#01a5e1" layoutX="363.0" layoutY="182.0" prefHeight="25.0" prefWidth="220.0" promptText="Full Name" />
+                  <Label layoutX="275.0" layoutY="226.0" text="Password" />
+                  <Label layoutX="275.0" layoutY="264.0" text="Email" />
+                  <Label layoutX="277.0" layoutY="303.0" text="Role" />
+                  <JFXTextField fx:id="email" focusColor="#01a5e1" layoutX="363.0" layoutY="260.0" prefHeight="25.0" prefWidth="220.0" promptText="Email" />
+                  <ImageView fitHeight="180.0" fitWidth="180.0" layoutX="55.0" layoutY="139.0" pickOnBounds="true" preserveRatio="true">
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                     <image>
+                        <Image url="@../img/profile.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="profilePhoto" fitHeight="180.0" fitWidth="180.0" layoutX="55.0" layoutY="139.0" pickOnBounds="true" preserveRatio="true" />
+                  <JFXButton fx:id="addPhotoBtn" layoutX="54.0" layoutY="343.0" onAction="#addPhotoBtnAction" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #01A5E1;" text="Add Photo" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXPasswordField fx:id="password" focusColor="#01a5e1" layoutX="363.0" layoutY="222.0" prefHeight="25.0" prefWidth="220.0" promptText="Password" />
+                  <JFXButton fx:id="getUserBtn" layoutX="598.0" layoutY="130.0" onAction="#getUserBtnAction" prefHeight="30.0" prefWidth="59.0" style="-fx-background-color: #01A5E1;" text="Get" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </JFXButton>
+                  <TableView layoutX="696.0" layoutY="122.0" prefHeight="319.0" prefWidth="525.0">
+                    <columns>
+                        <TableColumn prefWidth="75.0" text="Column X" />
+                        <TableColumn prefWidth="75.0" text="Column X" />
+                        <TableColumn prefWidth="75.0" text="Column X" />
+                        <TableColumn prefWidth="75.0" text="Column X" />
+                        <TableColumn prefWidth="75.0" text="Column X" />
+                        <TableColumn prefWidth="75.0" text="Column X" />
+                        <TableColumn prefWidth="75.0" text="Column X" />
+                    </columns>
+                  </TableView>
+                  <Button fx:id="resetFormBtn" layoutX="617.0" layoutY="187.0" mnemonicParsing="false" onMouseClicked="#resetBtnAction" prefHeight="22.0" prefWidth="22.0" styleClass="decoration-button-refresh">
+                     <font>
+                        <Font size="1.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="deleteMemberFormBtn" layoutX="617.0" layoutY="232.0" mnemonicParsing="false" onAction="#deleteMemberFormBtnAction" prefHeight="22.0" prefWidth="22.0" styleClass="decoration-button-delete">
+                     <font>
+                        <Font size="1.0" />
+                     </font>
+                  </Button>
+                  <JFXButton layoutX="374.0" layoutY="387.0" prefHeight="30.0" prefWidth="199.0" style="-fx-background-color: #01A5E1;" text="Update User" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </Pane>
+            <JFXButton fx:id="closeBtn" layoutX="967.0" onAction="#closeBtnAction" text="x" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

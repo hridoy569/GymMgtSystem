@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="500.0" maxWidth="1000.0" prefHeight="500.0" prefWidth="1000.0" style="-fx-background-color: #222;" stylesheets="@../style/winDec.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gymmgtsystem.PackagesFormController">
+   <children>
+      <AnchorPane layoutX="70.0" prefHeight="469.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+         <children>
+            <Pane layoutX="60.0" layoutY="50.0" prefHeight="360.0" prefWidth="363.0" AnchorPane.topAnchor="50.0">
+               <children>
+                  <Label layoutX="25.0" layoutY="97.0" text="Package Name" />
+                  <JFXTextField fx:id="packageName" focusColor="#01a5e1" layoutX="154.0" layoutY="95.0" prefHeight="25.0" prefWidth="150.0" promptText="Package Name" />
+                  <Label layoutX="25.0" layoutY="141.0" text="Package Type" />
+                  <JFXTextField fx:id="packageType" focusColor="#01a5e1" layoutX="154.0" layoutY="138.0" prefHeight="25.0" prefWidth="150.0" promptText="Package Type" />
+                  <Label layoutX="25.0" layoutY="39.0" text="Package Details">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Line endX="100.0" fill="BLACK" layoutX="174.0" layoutY="66.0" scaleX="1.5" startX="-100.0" strokeMiterLimit="11.0" />
+                  <Label layoutX="25.0" layoutY="183.0" text="Package Duration" />
+                  <JFXTextField fx:id="packageDuration" focusColor="#01a5e1" layoutX="154.0" layoutY="181.0" prefHeight="25.0" prefWidth="150.0" promptText="Package Duration" />
+                  <Label layoutX="25.0" layoutY="222.0" text="Fee" />
+                  <JFXTextField fx:id="packageFee" focusColor="#01a5e1" layoutX="154.0" layoutY="219.0" prefHeight="25.0" prefWidth="150.0" promptText="Fee in BDT" />
+                  <JFXButton fx:id="addBtn" layoutX="125.0" layoutY="293.0" onAction="#addPackage" prefHeight="29.0" prefWidth="179.0" style="-fx-background-color: #01A5E1;" text="Add Package" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </Pane>
+            <TableView fx:id="packageTable" layoutX="464.0" layoutY="88.0" prefHeight="315.0" prefWidth="458.0">
+              <columns>
+                <TableColumn fx:id="serialColumn" prefWidth="73.0" text="C1" />
+                <TableColumn fx:id="packageNameColumn" prefWidth="119.0" text="C2" />
+                  <TableColumn fx:id="packageTypeColumn" prefWidth="108.0" text="C2" />
+                  <TableColumn fx:id="packageDurationColumn" minWidth="0.0" prefWidth="0.0" text="C2" />
+                  <TableColumn fx:id="packageFeeColumn" prefWidth="75.0" text="C2" />
+                  <TableColumn fx:id="serialColumn1" prefWidth="81.0" text="C1" />
+              </columns>
+            </TableView>
+            <JFXButton fx:id="closeBtn" layoutX="967.0" onAction="#closeBtnAction" text="x" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
