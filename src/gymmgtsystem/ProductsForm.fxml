@@ -6,6 +6,9 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -22,53 +25,100 @@
                <children>
                   <AnchorPane fx:id="formroot" maxWidth="1296.0" prefHeight="590.0" prefWidth="1296.0" style="-fx-background-color: #fff;" stylesheets="@../style/tabPane.css">
                      <children>
-                        <AnchorPane layoutX="74.0" layoutY="80.0" prefHeight="469.0" AnchorPane.leftAnchor="74.0" AnchorPane.rightAnchor="74.0" AnchorPane.topAnchor="80.0">
-                           <children>
-                              <Pane layoutX="121.0" layoutY="40.0" prefHeight="390.0" prefWidth="362.0">
-                                 <children>
-                                    <Label layoutX="25.0" layoutY="97.0" text="Product Name" />
-                                    <JFXTextField fx:id="productName" focusColor="#01a5e1" layoutX="154.0" layoutY="95.0" prefHeight="25.0" prefWidth="150.0" promptText="Jhon " />
-                                    <Label layoutX="25.0" layoutY="141.0" text="Product Code" />
-                                    <JFXTextField fx:id="productCode" focusColor="#01a5e1" layoutX="154.0" layoutY="138.0" prefHeight="25.0" prefWidth="150.0" promptText="Doe" />
-                                    <Label layoutX="25.0" layoutY="192.0" text="Description" />
-                                    <Label layoutX="25.0" layoutY="272.0" text="Size" />
-                                    <JFXTextField fx:id="productSize" focusColor="#01a5e1" layoutX="154.0" layoutY="268.0" prefHeight="25.0" prefWidth="150.0" promptText="67&quot; in" />
-                                    <Label layoutX="25.0" layoutY="39.0" text="Member Details">
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <Line endX="100.0" fill="BLACK" layoutX="174.0" layoutY="66.0" scaleX="1.5" startX="-100.0" strokeMiterLimit="11.0" />
-                                    <Label layoutX="25.0" layoutY="309.0" text="Quantity" />
-                                    <JFXTextField fx:id="productQuantity" focusColor="#01a5e1" layoutX="154.0" layoutY="306.0" prefHeight="25.0" prefWidth="150.0" promptText="70 kg" />
-                                    <JFXTextArea fx:id="productDescription" focusColor="#01a5e1" layoutX="160.0" layoutY="192.0" maxWidth="142.0" minWidth="118.0" prefHeight="50.0" prefWidth="137.0" promptText="21 Down Town, LA, USA" wrapText="true" />
-                                 </children>
-                              </Pane>
-                              <Pane layoutX="656.0" layoutY="71.0" prefHeight="283.0" prefWidth="362.0">
-                                 <children>
-                                    <Label layoutX="25.0" layoutY="39.0" text="Contact">
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <Line endX="100.0" fill="BLACK" layoutX="174.0" layoutY="66.0" scaleX="1.5" startX="-100.0" strokeMiterLimit="11.0" />
-                                    <Label layoutX="24.0" layoutY="135.0" text="Purchase Date" />
-                                    <Label layoutX="24.0" layoutY="183.0" text="Purchase Price" />
-                                    <JFXTextField fx:id="buyingPrice" focusColor="#01a5e1" layoutX="153.0" layoutY="180.0" prefHeight="25.0" prefWidth="150.0" promptText="+8801234567890" />
-                                    <Label layoutX="23.0" layoutY="235.0" text="Selling Price" />
-                                    <JFXTextField fx:id="sellingPrice" focusColor="#01a5e1" layoutX="153.0" layoutY="228.0" prefHeight="25.0" prefWidth="150.0" promptText="+8801234567890" />
-                                    <JFXDatePicker fx:id="purchaseDate" layoutX="153.0" layoutY="130.0" prefHeight="28.0" prefWidth="150.0" promptText="5/3/2017" />
-                                    <Label layoutX="24.0" layoutY="90.0" text="Product type" />
-                                    <JFXTextField fx:id="productType" focusColor="#01a5e1" layoutX="153.0" layoutY="83.0" prefHeight="25.0" prefWidth="150.0" promptText="+8801234567890" />
-                                 </children>
-                              </Pane>
-                              <JFXButton fx:id="addBtn" layoutX="791.0" layoutY="377.0" onAction="#addProduct" prefHeight="29.0" prefWidth="179.0" style="-fx-background-color: #01A5E1;" text="Add Product" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="13.0" />
-                                 </font>
-                              </JFXButton>
-                           </children>
-                        </AnchorPane>
+                        <TabPane fx:id="membersTabPane" layoutX="366.0" layoutY="61.0" onMouseClicked="#memberTabAction" prefHeight="469.0" prefWidth="926.0" AnchorPane.rightAnchor="74.0" AnchorPane.topAnchor="80.0">
+                           <tabs>
+                              <Tab fx:id="addMemberTab" closable="false" text="   Add Product   ">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #F4F4F4;">
+                                       <children>
+                                          <JFXButton fx:id="instructorBtn" layoutX="799.0" layoutY="343.0" onAction="#instructorBtnAction" prefHeight="40.0" prefWidth="93.0" style="-fx-background-color: #01A5E1;" text="Add more info for Instructor" textAlignment="CENTER" textFill="WHITE" visible="false" wrapText="true" AnchorPane.bottomAnchor="67.0" AnchorPane.rightAnchor="35.0">
+                                             <font>
+                                                <Font name="System Bold" size="10.0" />
+                                             </font>
+                                          </JFXButton>
+                                          <Pane layoutX="45.0" layoutY="23.0" prefHeight="390.0" prefWidth="362.0">
+                                             <children>
+                                                <Label layoutX="25.0" layoutY="97.0" text="Product Name" />
+                                                <JFXTextField fx:id="productName" focusColor="#01a5e1" layoutX="154.0" layoutY="95.0" prefHeight="25.0" prefWidth="150.0" promptText="Jhon " />
+                                                <Label layoutX="25.0" layoutY="141.0" text="Product Code" />
+                                                <JFXTextField fx:id="productCode" focusColor="#01a5e1" layoutX="154.0" layoutY="138.0" prefHeight="25.0" prefWidth="150.0" promptText="Doe" />
+                                                <Label layoutX="25.0" layoutY="192.0" text="Description" />
+                                                <Label layoutX="25.0" layoutY="272.0" text="Size" />
+                                                <JFXTextField fx:id="productSize" focusColor="#01a5e1" layoutX="154.0" layoutY="268.0" prefHeight="25.0" prefWidth="150.0" promptText="67&quot; in" />
+                                                <Label layoutX="25.0" layoutY="39.0" text="Product Details">
+                                                   <font>
+                                                      <Font name="System Bold" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Line endX="100.0" fill="BLACK" layoutX="174.0" layoutY="66.0" scaleX="1.5" startX="-100.0" strokeMiterLimit="11.0" />
+                                                <Label layoutX="25.0" layoutY="309.0" text="Quantity" />
+                                                <JFXTextField fx:id="productQuantity" focusColor="#01a5e1" layoutX="154.0" layoutY="306.0" prefHeight="25.0" prefWidth="150.0" promptText="70 kg" />
+                                                <JFXTextArea fx:id="productDescription" focusColor="#01a5e1" layoutX="160.0" layoutY="192.0" maxWidth="142.0" minWidth="118.0" prefHeight="50.0" prefWidth="137.0" promptText="21 Down Town, LA, USA" wrapText="true" />
+                                             </children>
+                                          </Pane>
+                                          <Pane layoutX="483.0" layoutY="23.0" prefHeight="335.0" prefWidth="362.0">
+                                             <children>
+                                                <Line endX="100.0" fill="BLACK" layoutX="174.0" layoutY="66.0" scaleX="1.5" startX="-100.0" strokeMiterLimit="11.0" />
+                                                <Label layoutX="24.0" layoutY="161.0" text="Purchase Date" />
+                                                <Label layoutX="24.0" layoutY="209.0" text="Purchase Price" />
+                                                <JFXTextField fx:id="buyingPrice" focusColor="#01a5e1" layoutX="153.0" layoutY="206.0" prefHeight="25.0" prefWidth="150.0" promptText="+8801234567890" />
+                                                <Label layoutX="23.0" layoutY="261.0" text="Selling Price" />
+                                                <JFXTextField fx:id="sellingPrice" focusColor="#01a5e1" layoutX="153.0" layoutY="254.0" prefHeight="25.0" prefWidth="150.0" promptText="+8801234567890" />
+                                                <JFXDatePicker fx:id="purchaseDate" layoutX="153.0" layoutY="156.0" prefHeight="28.0" prefWidth="150.0" promptText="5/3/2017" />
+                                                <Label layoutX="24.0" layoutY="116.0" text="Product type" />
+                                                <JFXTextField fx:id="productType" focusColor="#01a5e1" layoutX="153.0" layoutY="109.0" prefHeight="25.0" prefWidth="150.0" promptText="+8801234567890" />
+                                             </children>
+                                          </Pane>
+                                          <JFXButton fx:id="addBtn" layoutX="624.0" layoutY="378.0" onAction="#addProduct" prefHeight="29.0" prefWidth="179.0" style="-fx-background-color: #01A5E1;" text="Add Product" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="13.0" />
+                                             </font>
+                                          </JFXButton>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab fx:id="membershipTab" closable="false" text="   View Products   ">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="903.0" style="-fx-background-color: #F4F4F4;">
+                                       <children>
+                                          <StackPane fx:id="membershipStack" layoutX="-151.0" layoutY="56.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="55.0">
+                                             <children>
+                                                <AnchorPane fx:id="formAnchorPane" prefHeight="330.0" prefWidth="816.0" style="-fx-background-color: #F4F4F4;">
+                                                   <children>
+                                                      <Label layoutX="2.25" text="Product Details">
+                                                         <font>
+                                                            <Font name="System Bold" size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Line endX="650.0" fill="BLACK" layoutX="100.0" layoutY="26.0" startX="-100.0" strokeMiterLimit="11.0" />
+                                                      <TableView fx:id="productTable" layoutX="1.0" layoutY="32.0" onMouseClicked="#selectTableRowListener" prefHeight="408.0" prefWidth="926.0" style="-fx-background-color: #fff;" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </StackPane>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                           </tabs>
+                        </TabPane>
+                        <JFXTextField fx:id="productSearch" focusColor="#01a5e1" layoutX="135.0" layoutY="78.0" maxWidth="121.0" minWidth="93.0" prefHeight="31.0" prefWidth="116.0" promptText="   Search by ID" style="-fx-background-color: #F4F4F4;" unFocusColor="#f4f4f4" AnchorPane.rightAnchor="1110.0" />
+                        <JFXButton fx:id="getProductBtn" layoutX="259.0" layoutY="79.0" onAction="#getProduct" prefHeight="29.0" prefWidth="61.0" style="-fx-background-color: #01A5E1;" text="Get" textFill="WHITE" AnchorPane.rightAnchor="1046.0">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </JFXButton>
+                        <Button fx:id="refreshBtn" mnemonicParsing="false" onAction="#refreshBtnAction" onMouseClicked="#resetMemberFormBtnAction" prefHeight="22.0" prefWidth="22.0" styleClass="decoration-button-refresh" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="150.0">
+                           <font>
+                              <Font size="1.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="deleteProductBtn" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="22.0" prefWidth="22.0" styleClass="decoration-button-delete" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="195.0">
+                           <font>
+                              <Font size="1.0" />
+                           </font>
+                        </Button>
                      </children>
                   </AnchorPane>
                </children>
