@@ -9,6 +9,8 @@ package gymmgtsystem;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
@@ -31,6 +33,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -50,6 +53,7 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -179,6 +183,9 @@ public class MembersFormController implements Initializable {
     private Button addShiftBtn;
     @FXML
     private Button addPackageBtn;
+    private Image convertToJavaFXImage;
+    private byte[] dbImage;
+    private boolean photoAdded = false;
 
     /**
      * Initializes the controller class.
@@ -191,11 +198,11 @@ public class MembersFormController implements Initializable {
         glowMembersBtn();
         ObservableList<String> shapeList = FXCollections.observableArrayList("Lean", "Fat", "Skinny");
         bodyshapCombo.setItems(shapeList);
-//        bodyshapCombo.getSelectionModel().selectFirst();
+        bodyshapCombo.getSelectionModel().selectFirst();
 
         ObservableList<String> memberTypeList = FXCollections.observableArrayList("Member", "Instructor");
         memberTypeCombo.setItems(memberTypeList);
-//        memberTypeCombo.getSelectionModel().selectFirst();
+        memberTypeCombo.getSelectionModel().selectFirst();
 
         loadShift();
         loadPackage();
@@ -255,7 +262,8 @@ public class MembersFormController implements Initializable {
 
                 try {
 
-                    String sql = "INSERT into member(member_fname, member_lname, gender, dob, email, cell, address, occupation, height, weight, body_shape, member_type, member_image) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    String sql = "INSERT into member(member_fname, member_lname, gender, dob, email, cell, address, occupation,"
+                            + " height, weight, body_shape, member_type, member_image) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
                     ps = con.prepareStatement(sql);
                     ps.setString(1, fname.getText());
                     ps.setString(2, lname.getText());
@@ -293,23 +301,22 @@ public class MembersFormController implements Initializable {
                     ps = con.prepareStatement(sql1);
                     ps.setString(1, shiftName);
                     rs = ps.executeQuery();
-                    String shiftId=null;
+                    String shiftId = null;
                     while (rs.next()) {
                         shiftId = rs.getString(1);
                         System.out.println(shiftId);
                     }
-                    
+
                     String packageName = packageCombo.getSelectionModel().getSelectedItem().toString();
                     String sql2 = "SELECT package_id FROM package where package_name=?";
                     ps = con.prepareStatement(sql2);
                     ps.setString(1, packageName);
                     rs = ps.executeQuery();
-                    String packageId=null;
+                    String packageId = null;
                     while (rs.next()) {
                         packageId = rs.getString(1);
                         System.out.println(packageId);
                     }
-                        
 
                     String startDateValue = startDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                     String endDateValue = endDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -338,7 +345,47 @@ public class MembersFormController implements Initializable {
 
         } else {
             if (tabIndex == 0) {
-                System.out.println("Membership updated");
+                if (maleRadio.isSelected()) {
+                    genderSelected = "Male";
+                } else {
+                    genderSelected = "Female";
+                }
+                String sqlDate = dob.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                try {
+
+                    String sql = "UPDATE member SET member_fname=?, member_lname=?, gender=?, dob=?, email=?, cell=?, address=?, occupation=?, "
+                            + "height=?, weight=?, body_shape=?, member_type=?, member_image=? WHERE member_id=?";
+                    ps = con.prepareStatement(sql);
+                    ps.setString(1, fname.getText());
+                    ps.setString(2, lname.getText());
+                    ps.setString(3, genderSelected);
+                    ps.setString(4, sqlDate);
+                    ps.setString(5, email.getText());
+                    ps.setString(6, cellNo.getText());
+                    ps.setString(7, address.getText());
+                    ps.setString(8, occupaton.getText());
+                    ps.setString(9, height.getText());
+                    ps.setString(10, weight.getText());
+                    ps.setString(11, bodyshapCombo.getSelectionModel().getSelectedItem().toString());
+                    ps.setString(12, memberTypeCombo.getSelectionModel().getSelectedItem().toString());
+                    if (photoAdded == false) {
+                        ps.setBytes(13, dbImage);
+                    } else {
+                        ps.setBinaryStream(13, proPic, proPic.available());
+                        photoAdded = false;
+                    }
+                    ps.setString(14, id.getText());
+                    ps.executeUpdate();
+
+                    resetMemberDetails();
+
+                    System.out.println("Membership updated");
+
+                } catch (Exception e) {
+                    System.out.println("update error");
+                    e.printStackTrace();
+                }
+
             } else if (tabIndex == 1) {
                 System.out.println("Membership updated");
             } else {
@@ -392,19 +439,23 @@ public class MembersFormController implements Initializable {
         occupaton.clear();
         height.clear();
         weight.clear();
-        bodyshapCombo.getSelectionModel().clearSelection(); 
-        memberTypeCombo.getSelectionModel().clearSelection(); 
+        bodyshapCombo.getSelectionModel().selectFirst();
+        memberTypeCombo.getSelectionModel().selectFirst();
         profilePhoto.setImage(null);
         id.clear();
+        maleRadio.setSelected(true);
         saveBtnCondition = "insert";
         buttonChange();
+    }
 
+    private void resetMembershipDetails() {
         idMembership.clear();
-        shift.getSelectionModel().clearSelection(); 
-        packageCombo.getSelectionModel().clearSelection(); 
-        instructorCombo.getSelectionModel().clearSelection(); 
+        shift.getSelectionModel().clearSelection();
+        packageCombo.getSelectionModel().clearSelection();
+        instructorCombo.getSelectionModel().clearSelection();
         startDate.setValue(null);
         endDate.setValue(null);
+
     }
 
     @FXML
@@ -429,7 +480,7 @@ public class MembersFormController implements Initializable {
             proPic = new FileInputStream(imagePath);
             System.out.println(imagePath);
         }
-
+        photoAdded = true;
     }
 
     @FXML
@@ -444,11 +495,43 @@ public class MembersFormController implements Initializable {
     }
 
     @FXML
-    private void deleteMemberFormBtnAction(ActionEvent event) {
+    private void deleteMemberFormBtnAction(ActionEvent event){
+        System.out.println("delete");
+        JFXDialogLayout content = new JFXDialogLayout();
+        content.setHeading(new Text("Confirmation to " + "delete"));
+        content.setBody(new Text("Do you want to " + "delete" + " the data? "
+                + "If your answer is yes press Okay button "
+                + "else click outside of this box."));
+        JFXDialog dialog = new JFXDialog(memberStack, content, JFXDialog.DialogTransition.CENTER);
+        JFXButton button = new JFXButton("Okay");
+        button.setStyle("-fx-background-color: #094AAB; -fx-text-fill: #fff;");
+        final Glow glow = new Glow();
+        glow.setLevel(0.69);
+        button.setEffect(glow);
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    ps = con.prepareStatement("delete from member where member_id=?");
+                    ps.setString(1, id.getText());
+                    ps.executeUpdate();
+                    dialog.close();
+                resetMemberDetails();
+                } catch (SQLException ex) {
+                    Logger.getLogger(MembersFormController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
+
+           });
+        content.setActions(button);
+        dialog.show();
     }
 
-    @FXML
-    private void getBtnAction(ActionEvent event) throws SQLException {
+
+
+@FXML
+        private void getBtnAction(ActionEvent event) throws SQLException {
         ps = con.prepareStatement("Select * from member where member_id=?");
         ps.setString(1, id.getText());
         rs = ps.executeQuery();
@@ -484,12 +567,13 @@ public class MembersFormController implements Initializable {
             } else {
                 femaleRadio.setSelected(true);
             }
-
-            Image convertToJavaFXImage = convertToJavaFXImage(rs.getBytes("member_image"), 180, 180);
+            dbImage = rs.getBytes("member_image");
+            convertToJavaFXImage = convertToJavaFXImage(dbImage, 180, 180);
 
             profilePhoto.setImage(convertToJavaFXImage);
             saveBtnCondition = "update";
             buttonChange();
+
         }
     }
 
@@ -543,12 +627,12 @@ public class MembersFormController implements Initializable {
     }
 
     @FXML
-    private void instructorBtnAction(ActionEvent event) throws IOException {
+        private void instructorBtnAction(ActionEvent event) throws IOException {
         nextStage(GymMgtSystem.InsInfo, "", true);
     }
 
     @FXML
-    private void memberTypeComboAction(ActionEvent event) {
+        private void memberTypeComboAction(ActionEvent event) {
         String value = memberTypeCombo.getSelectionModel().getSelectedItem().toString();
         if (value.equals("Instructor")) {
             instructorBtn.setVisible(true);
@@ -566,22 +650,23 @@ public class MembersFormController implements Initializable {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(resizable);
         stage.show();
-        
+
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2); 
-        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);  
+        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
     }
 
     @FXML
-    private void saveBillBtnAction(ActionEvent event) {
+        private void saveBillBtnAction(ActionEvent event) {
     }
 
     @FXML
-    private void resetBillBtn(ActionEvent event) {
+        private void resetBillBtn(ActionEvent event) {
     }
 
     @FXML
-    private void deleteBillBtnAction(ActionEvent event) {
+        private void deleteBillBtnAction(ActionEvent event) throws SQLException {
+
     }
 
     private void loadShift() {
@@ -628,13 +713,13 @@ public class MembersFormController implements Initializable {
     }
 
     @FXML
-    private void addShiftBtnAction(ActionEvent event) throws IOException {
+        private void addShiftBtnAction(ActionEvent event) throws IOException {
         nextStage(GymMgtSystem.ShiftForm, "", true);
     }
 
     @FXML
-    private void addPackageBtnAction(ActionEvent event) throws IOException {
-            nextStage(GymMgtSystem.PackagesForm, "", true);
+        private void addPackageBtnAction(ActionEvent event) throws IOException {
+        nextStage(GymMgtSystem.PackagesForm, "", true);
     }
 
 }
