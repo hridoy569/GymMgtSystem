@@ -82,21 +82,13 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="903.0" style="-fx-background-color: #F4F4F4;">
                                        <children>
-                                          <StackPane fx:id="membershipStack" layoutX="-151.0" layoutY="56.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="55.0">
-                                             <children>
-                                                <AnchorPane fx:id="formAnchorPane" prefHeight="330.0" prefWidth="816.0" style="-fx-background-color: #F4F4F4;">
-                                                   <children>
-                                                      <Label layoutX="2.25" text="Product Details">
-                                                         <font>
-                                                            <Font name="System Bold" size="18.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Line endX="650.0" fill="BLACK" layoutX="100.0" layoutY="26.0" startX="-100.0" strokeMiterLimit="11.0" />
-                                                      <TableView fx:id="productTable" layoutX="1.0" layoutY="32.0" onMouseClicked="#selectTableRowListener" prefHeight="408.0" prefWidth="926.0" style="-fx-background-color: #fff;" />
-                                                   </children>
-                                                </AnchorPane>
-                                             </children>
-                                          </StackPane>
+                                          <TableView fx:id="productTable" layoutX="39.0" layoutY="70.0" prefHeight="351.0" prefWidth="858.0" />
+                                          <JFXTextField fx:id="filterInput" focusColor="#01a5e1" layoutX="39.0" layoutY="22.0" maxWidth="760.0" minWidth="93.0" prefHeight="31.0" prefWidth="760.0" promptText="   Search by Code" style="-fx-background-color: #F4F4F4;" unFocusColor="#f4f4f4" />
+                                          <JFXButton layoutX="811.0" layoutY="23.0" onAction="#searchProduct" prefHeight="29.0" prefWidth="87.0" style="-fx-background-color: #01A5E1;" text="Search" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </JFXButton>
                                        </children>
                                     </AnchorPane>
                                  </content>
