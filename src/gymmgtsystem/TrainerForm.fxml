@@ -57,7 +57,7 @@
                                                 </Button>
                                              </children>
                                           </Pane>
-                                          <Label fx:id="mealName" layoutX="627.0" layoutY="85.0" prefHeight="47.0" prefWidth="415.0" style="-fx-background-color: #fff;" text="Meal 1">
+                                          <Label layoutX="627.0" layoutY="85.0" prefHeight="47.0" prefWidth="415.0" style="-fx-background-color: #fff;" text="Meal 1">
                                              <font>
                                                 <Font name="System Bold" size="21.0" />
                                              </font>
@@ -757,7 +757,7 @@
             </StackPane>
          </children>
       </AnchorPane>
-      <VBox alignment="CENTER" prefHeight="590.0" prefWidth="70.0" style="-fx-background-color: #222;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox fx:id="sidePane" alignment="CENTER" prefHeight="590.0" prefWidth="70.0" style="-fx-background-color: #222;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <effect>
             <DropShadow />
          </effect>

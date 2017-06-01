@@ -5,7 +5,7 @@
  */
 package gymmgtsystem;
 
-import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXColorPicker;
 import com.jfoenix.controls.JFXToggleButton;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -28,6 +28,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -44,9 +45,15 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -183,6 +190,13 @@ public class MainFrameController implements Initializable {
     private Label bphoneLabel;
     @FXML
     private Label bemailLabel;
+    private JFXColorPicker colorPicker;
+    @FXML
+    private VBox vbox2;
+    Connection con = null;
+    PreparedStatement ps;
+    ResultSet rs;
+    private String colorCode;
 
     public void setUsrNameMedia(String name) {
         loggedInUser.setText(name);
@@ -220,11 +234,12 @@ public class MainFrameController implements Initializable {
             maximize.getStyleClass().add("decoration-button-restore");
 
         });
-
         makeDragable(true);
         escEvent();
         clock();
-        loadLogo();
+        loadBusinessProfile();
+        con = DB.getConnection();
+        changeThemeColor();
     }
 
     @FXML
@@ -402,6 +417,7 @@ public class MainFrameController implements Initializable {
 
     @FXML
     private void homeBtnAction(ActionEvent event) {
+        loadBusinessProfile();
         homePane.toFront();
         homeBtn.setStyle("-fx-background-color: null; -fx-background-image:url(img/movies.png); -fx-background-repeat:no-repeat;");
         memberBtn.setStyle("-fx-background-color: null; -fx-background-repeat:no-repeat;");
@@ -414,40 +430,6 @@ public class MainFrameController implements Initializable {
         reportsBtn.setStyle("-fx-background-color: null; -fx-background-repeat:no-repeat;");
     }
 
-//    @FXML
-//    private void toggleAttViewAction(MouseEvent event) {
-//        if (viewChange.equals("tile")) {
-//            toggleAttView.setText("Table View");
-//            viewChange = "table";
-//
-//            if (event.getClickCount() >= 1) {
-//                countToggleView += 1;
-//            } else {
-//            }
-//
-//            if (countToggleView <= 1) {
-//
-//                try {
-//                    attandenceTable = FXMLLoader.load(getClass().getResource("AttandenceTable.fxml"));
-//                    attendStackPane.getChildren().add(attandenceTable);
-//                    stage.setMaximized(true);
-//                } catch (IOException ex) {
-//                    Logger.getLogger(MainFrameController.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//                System.out.println("attandenceTable added");
-//            } else {
-//                attandenceTable.toFront();
-//                stage.setMaximized(true);
-//                System.out.println("attandenceTable.toFront");
-//            }
-//        } else {
-//            toggleAttView.setText("Tile View");
-//            viewChange = "tile";
-//            tilePane.toFront();
-//            System.out.println("tilePane.toFront");
-//        }
-//
-//    }
     @FXML
     private void toggleAttStatusAction(MouseEvent event) {
 
@@ -562,71 +544,7 @@ public class MainFrameController implements Initializable {
         clock.play();
 
     }
-
-//    private void shiftBtnAction(MouseEvent e) {
-//        
-//        if (e.getClickCount() >= 1) {
-//            countShiftBtn += 1;
-//        } else {
-//        }
-//
-//        if (countShiftBtn <= 1) {
-//
-//            try {
-//                shiftForm = FXMLLoader.load(getClass().getResource("ShiftForm.fxml"));
-//                stack4DialogLayout.getChildren().add(shiftForm);
-//                stage.setMaximized(true);
-//            } catch (IOException ex) {
-//                Logger.getLogger(MainFrameController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//            System.out.println("shiftForm added");
-//        } else {
-//            shiftForm.toFront();
-//            stage.setMaximized(true);
-//            System.out.println("shiftForm to Front");
-//        }
-//        homeBtn.setStyle("-fx-background-color: null; -fx-background-repeat:no-repeat;");
-//        memberBtn.setStyle("-fx-background-color: null; -fx-background-repeat:no-repeat;");
-//        shiftBtn.setStyle("-fx-background-color: null; -fx-background-image:url(img/movies.png); -fx-background-repeat:no-repeat;");
-//        packagesBtn.setStyle("-fx-background-color: null; -fx-background-repeat:no-repeat;");
-//        tainerBtn.setStyle("-fx-background-color: null; -fx-background-repeat:no-repeat;");
-//        productBtn.setStyle("-fx-background-color: null; -fx-background-repeat:no-repeat;");
-//        instrumentBtn.setStyle("-fx-background-color: null; -fx-background-repeat:no-repeat;");
-//        accountsBtn.setStyle("-fx-background-color: null; -fx-background-repeat:no-repeat;");
-//        reportsBtn.setStyle("-fx-background-color: null; -fx-background-repeat:no-repeat;");
-//    }
-//    private void packagesBtnAction(MouseEvent e) {
-//        
-//        if (e.getClickCount() >= 1) {
-//            countPackagesBtn += 1;
-//        } else {
-//        }
-//
-//        if (countPackagesBtn <= 1) {
-//
-//            try {
-//                packagesForm = FXMLLoader.load(getClass().getResource("PackagesForm.fxml"));
-//                stack4DialogLayout.getChildren().add(packagesForm);
-//                stage.setMaximized(true);
-//            } catch (IOException ex) {
-//                Logger.getLogger(MainFrameController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//            System.out.println("packagesForm added");
-//        } else {
-//            packagesForm.toFront();
-//            stage.setMaximized(true);
-//            System.out.println("packagesForm to Front");
-//        }
-//        homeBtn.setStyle("-fx-background-color: null; -fx-background-repeat:no-repeat;");
-//        memberBtn.setStyle("-fx-background-color: null; -fx-background-repeat:no-repeat;");
-////        shiftBtn.setStyle("-fx-background-color: null; -fx-background-repeat:no-repeat;");
-////        packagesBtn.setStyle("-fx-background-color: null; -fx-background-image:url(img/movies.png); -fx-background-repeat:no-repeat;");
-//        tainerBtn.setStyle("-fx-background-color: null; -fx-background-repeat:no-repeat;");
-//        productBtn.setStyle("-fx-background-color: null; -fx-background-repeat:no-repeat;");
-//        instrumentBtn.setStyle("-fx-background-color: null; -fx-background-repeat:no-repeat;");
-//        accountsBtn.setStyle("-fx-background-color: null; -fx-background-repeat:no-repeat;");
-//        reportsBtn.setStyle("-fx-background-color: null; -fx-background-repeat:no-repeat;");
-//    }
+    
     @FXML
     private void trainerBtnAction(MouseEvent e) {
         if (e.getClickCount() >= 1) {
@@ -634,7 +552,7 @@ public class MainFrameController implements Initializable {
         } else {
         }
 
-//        if (countTrainerBtn <= 1) {
+        if (countTrainerBtn <= 1) {
         try {
             trainerForm = FXMLLoader.load(getClass().getResource("TrainerForm.fxml"));
             stack4DialogLayout.getChildren().add(trainerForm);
@@ -643,11 +561,11 @@ public class MainFrameController implements Initializable {
             Logger.getLogger(MainFrameController.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println("trainerForm added");
-//        } else {
-//            trainerForm.toFront();
-//            stage.setMaximized(true);
-//            System.out.println("trainerForm to Front");
-//        }
+        } else {
+            trainerForm.toFront();
+            stage.setMaximized(true);
+            System.out.println("trainerForm to Front");
+        }
         homeBtn.setStyle("-fx-background-color: null; -fx-background-repeat:no-repeat;");
         memberBtn.setStyle("-fx-background-color: null; -fx-background-repeat:no-repeat;");
 //        shiftBtn.setStyle("-fx-background-color: null; -fx-background-repeat:no-repeat;");
@@ -857,7 +775,7 @@ public class MainFrameController implements Initializable {
 //        settingsBtn.setStyle("-fx-background-color: null; -fx-background-image:url(img/movies.png); -fx-background-repeat:no-repeat;");
     }
 
-    private void loadLogo() {
+    private void loadBusinessProfile() {
         try {
             Connection con = DB.getConnection();
             String sql = "SELECT * FROM business_profile";
@@ -886,6 +804,20 @@ public class MainFrameController implements Initializable {
 //            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
         return image;
+    }
+    private void changeThemeColor(){
+        try {
+            String sql = "SELECT color_code FROM color where id=1";
+            ps = con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                colorCode = rs.getString("color_code");
+                hbox2.setStyle("-fx-background-color:"+colorCode);
+                vbox2.setStyle("-fx-background-color:"+colorCode);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -226,11 +226,14 @@
                      <top>
                         <HBox fx:id="hbox2" maxHeight="65.0" maxWidth="1366.0" minHeight="65.0" minWidth="1366.0" prefHeight="65.0" prefWidth="1366.0" style="-fx-background-color: #222;" stylesheets="@../style/winDec.css" BorderPane.alignment="CENTER">
                            <children>
-                              <ImageView fx:id="logoFrame" fitHeight="60.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+                              <AnchorPane maxHeight="60.0" maxWidth="250.0" minHeight="60.0" minWidth="250.0" prefHeight="60.0" prefWidth="250.0" HBox.hgrow="NEVER">
                                  <HBox.margin>
                                     <Insets right="50.0" top="5.0" />
                                  </HBox.margin>
-                              </ImageView>
+                                 <children>
+                                    <ImageView fx:id="logoFrame" fitHeight="60.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
                               <Button fx:id="homeBtn" onAction="#homeBtnAction" prefHeight="34.0" prefWidth="70.0" style="-fx-background-color: transparent;" styleClass="decoration-button-movies" text="Home" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
@@ -396,7 +399,7 @@
       </StackPane>
    </center>
    <top>
-      <VBox style="-fx-background-color: #222;" stylesheets="@../style/winDec.css" BorderPane.alignment="CENTER">
+      <VBox fx:id="vbox2" style="-fx-background-color: #222;" stylesheets="@../style/winDec.css" BorderPane.alignment="CENTER">
          <children>
             <HBox fx:id="hbox" prefHeight="34.0" prefWidth="900.0">
                <children>
@@ -415,7 +418,7 @@
                               <Button fx:id="fullscreen" layoutX="3.0" layoutY="3.0" mnemonicParsing="false" onAction="#aksifullscreen" prefHeight="30.0" prefWidth="34.0" styleClass="decoration-button-fullscreen" />
                            </children>
                         </AnchorPane>
-                        <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="295.0" text="Gym Management System" textFill="#222222" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                        <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="295.0" text="Gym Management System" textFill="#222222" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>

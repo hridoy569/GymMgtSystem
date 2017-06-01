@@ -35,6 +35,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
@@ -84,6 +85,9 @@ public class NewUserController implements Initializable {
     private Button deleteMemberFormBtn;
     @FXML
     private JFXTextField userId;
+    @FXML
+    private AnchorPane rootPane;
+    private String colorCode;
 
     /**
      * Initializes the controller class.
@@ -93,6 +97,7 @@ public class NewUserController implements Initializable {
         ObservableList<String> memberTypeList = FXCollections.observableArrayList("Admin", "User");
         roleCmb.setItems(memberTypeList);
         con = DB.getConnection();
+        changeThemeColor();
     }
 
     @FXML
@@ -218,6 +223,19 @@ public class NewUserController implements Initializable {
             System.out.println("Update error");
         }
 
+    }
+    private void changeThemeColor() {
+        try {
+            String sql = "SELECT color_code FROM color where id=1";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                colorCode = rs.getString("color_code");
+                rootPane.setStyle("-fx-background-color:" + colorCode);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

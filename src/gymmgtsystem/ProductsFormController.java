@@ -33,6 +33,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import util.DB;
 
@@ -43,7 +44,6 @@ import util.DB;
  */
 public class ProductsFormController implements Initializable {
 
-    Connection con = null;
 
     @FXML
     private StackPane memberStack;
@@ -71,6 +71,15 @@ public class ProductsFormController implements Initializable {
     private JFXButton addBtn;
     @FXML
     private Button allMembersBtn;
+
+    @FXML
+    private TableView productTable;
+
+    @FXML
+    private JFXTextField productSearch;
+    
+    @FXML
+    private JFXTextField filterInput;
     @FXML
     private TabPane membersTabPane;
     @FXML
@@ -79,21 +88,18 @@ public class ProductsFormController implements Initializable {
     private JFXButton instructorBtn;
     @FXML
     private Tab membershipTab;
-
-    @FXML
-    private TableView productTable;
-
-    @FXML
-    private JFXTextField productSearch;
     @FXML
     private JFXButton getProductBtn;
     @FXML
+    private Button refreshBtn;
+    @FXML
     private Button deleteProductBtn;
     @FXML
-    private Button refreshBtn;
-    
-    @FXML
-    private JFXTextField filterInput;
+    private VBox sidePane;
+    Connection con = null;
+    PreparedStatement ps;
+    ResultSet rs;
+    private String colorCode;
 
     /**
      * Initializes the controller class.
@@ -101,6 +107,8 @@ public class ProductsFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         buildData();
+        con = DB.getConnection();
+        changeThemeColor();
     }
     LocalDate date;
     String add = "add";
@@ -237,14 +245,6 @@ String sqlDate = purchaseDate.getValue().format(DateTimeFormatter.ofPattern("yyy
     
   
 
-    @FXML
-    private void instructorBtnAction(ActionEvent event) {
-    }
-
-
-    @FXML
-    private void memberTabAction(MouseEvent event) {
-    }
     String getProductId;
 
     @FXML
@@ -281,9 +281,6 @@ String sqlDate = purchaseDate.getValue().format(DateTimeFormatter.ofPattern("yyy
         }
     }
 
-    @FXML
-    private void resetMemberFormBtnAction(MouseEvent event) {
-    }
 
     @FXML
     private void deleteProduct(ActionEvent event) {
@@ -351,6 +348,32 @@ String sqlDate = purchaseDate.getValue().format(DateTimeFormatter.ofPattern("yyy
     private void refreshBtnAction(ActionEvent event) {
         productTable.getItems().clear();
         buildData();
+    }
+
+    @FXML
+    private void instructorBtnAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void memberTabAction(MouseEvent event) {
+    }
+
+    @FXML
+    private void resetMemberFormBtnAction(MouseEvent event) {
+    }
+    
+    private void changeThemeColor() {
+        try {
+            String sql = "SELECT color_code FROM color where id=1";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                colorCode = rs.getString("color_code");
+                sidePane.setStyle("-fx-background-color:" + colorCode);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

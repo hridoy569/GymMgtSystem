@@ -47,7 +47,6 @@ public class ShiftFormController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    Connection con = null;
     @FXML
     private TableView<?> packageTable;
     @FXML
@@ -64,16 +63,22 @@ public class ShiftFormController implements Initializable {
     private TableColumn<?, ?> serialColumn1;
     @FXML
     private JFXButton closeBtn;
+    Connection con = null;
+    PreparedStatement ps;
+    ResultSet rs;
+    private String colorCode;
+    @FXML
+    private AnchorPane rootPane;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         loadPackages();
-       
+        con = DB.getConnection();
+        changeThemeColor();
     }
 
-    public void loadPackages(){
-     try {
-            con = DB.getConnection();
+    public void loadPackages() {
+        try {
             String sql = "SELECT * FROM package";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -89,14 +94,11 @@ public class ShiftFormController implements Initializable {
         } catch (Exception e) {
         }
 
-    
-    
     }
-    
+
     @FXML
     private void addshift(ActionEvent event) {
-                    try {
-            con = DB.getConnection();
+        try {
             String sql = "INSERT INTO shift(shift_name, start_time, package_id) VALUES(?,?,?) ";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, shiftName.getText());
@@ -105,7 +107,7 @@ public class ShiftFormController implements Initializable {
 
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected > 0) {
-                
+
                 clearForm();
             }
 
@@ -114,17 +116,31 @@ public class ShiftFormController implements Initializable {
         }
     }
 
-    
-        private void clearForm() {
+    private void clearForm() {
         shiftName.setText("");
         shiftTime.setText("");
         packageName.getSelectionModel().clearSelection();
 
     }
+
     @FXML
     private void closeBtnAction(ActionEvent event) {
-         Stage current = (Stage) closeBtn.getScene().getWindow();
+        Stage current = (Stage) closeBtn.getScene().getWindow();
         current.close();
+    }
+
+    private void changeThemeColor() {
+        try {
+            String sql = "SELECT color_code FROM color where id=1";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                colorCode = rs.getString("color_code");
+                rootPane.setStyle("-fx-background-color:" + colorCode);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

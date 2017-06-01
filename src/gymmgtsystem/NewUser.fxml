@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxWidth="1300.0" prefHeight="530.0" prefWidth="1300.0" style="-fx-background-color: #222;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gymmgtsystem.NewUserController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" maxWidth="1300.0" prefHeight="530.0" prefWidth="1300.0" style="-fx-background-color: #222;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gymmgtsystem.NewUserController">
    <children>
       <AnchorPane prefHeight="500.0" prefWidth="1300.0" style="-fx-background-color: #fff;" stylesheets="@../style/winDec.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>

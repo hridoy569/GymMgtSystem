@@ -9,6 +9,9 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,6 +22,8 @@ import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import util.DB;
 
 /**
  * FXML Controller class
@@ -89,6 +94,12 @@ public class TrainerFormController implements Initializable {
     private JFXTextField measure;
     @FXML
     private JFXComboBox<?> mealPlanCmb;
+    @FXML
+    private VBox sidePane;
+    Connection con = null;
+    PreparedStatement ps;
+    ResultSet rs;
+    private String colorCode;
 
     /**
      * Initializes the controller class.
@@ -96,6 +107,8 @@ public class TrainerFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODOsdfgszdfsdfsdfsdf
+        con = DB.getConnection();
+        changeThemeColor();
     }    
 
     @FXML
@@ -142,4 +155,17 @@ public class TrainerFormController implements Initializable {
     private void bodyShapeAction(ActionEvent event) {
     }
     
+    private void changeThemeColor(){
+        try {
+            String sql = "SELECT color_code FROM color where id=1";
+            ps = con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                colorCode = rs.getString("color_code");
+                sidePane.setStyle("-fx-background-color:"+colorCode);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

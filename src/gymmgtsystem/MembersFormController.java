@@ -53,6 +53,7 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Screen;
@@ -186,6 +187,9 @@ public class MembersFormController implements Initializable {
     private Image convertToJavaFXImage;
     private byte[] dbImage;
     private boolean photoAdded = false;
+    @FXML
+    private VBox sidePane;
+    private String colorCode;
 
     /**
      * Initializes the controller class.
@@ -207,6 +211,7 @@ public class MembersFormController implements Initializable {
         loadShift();
         loadPackage();
         loadInstructor();
+        changeThemeColor();
 
     }
 
@@ -720,6 +725,20 @@ public class MembersFormController implements Initializable {
     @FXML
         private void addPackageBtnAction(ActionEvent event) throws IOException {
         nextStage(GymMgtSystem.PackagesForm, "", true);
+    }
+        
+        private void changeThemeColor() {
+        try {
+            String sql = "SELECT color_code FROM color where id=1";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                colorCode = rs.getString("color_code");
+                sidePane.setStyle("-fx-background-color:" + colorCode);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

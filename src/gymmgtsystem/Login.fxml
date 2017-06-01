@@ -25,7 +25,7 @@
                   <Image url="@../img/cf0b4b825cd99b7e00ccf5cad3e7a014-weightlifting-circle-icon.png" />
                </image>
             </ImageView>
-            <Label layoutX="105.0" layoutY="112.0" text="IRON GYM" textFill="#838383">
+            <Label fx:id="businessName" alignment="CENTER" contentDisplay="CENTER" layoutX="105.0" layoutY="112.0" text="IRON GYM" textAlignment="CENTER" textFill="#838383" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="112.0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
