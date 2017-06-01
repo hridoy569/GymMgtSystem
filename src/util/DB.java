@@ -9,7 +9,7 @@ public class DB {
     public static Connection getConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gymmgtsystem", "root", "");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gymmgtsystem", "root", "1234");
             System.out.println("connection done");
             return con;
         } catch (Exception e) {
