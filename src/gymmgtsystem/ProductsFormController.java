@@ -79,10 +79,6 @@ public class ProductsFormController implements Initializable {
     private JFXButton instructorBtn;
     @FXML
     private Tab membershipTab;
-    @FXML
-    private StackPane membershipStack;
-    @FXML
-    private AnchorPane formAnchorPane;
 
     @FXML
     private TableView productTable;
@@ -95,6 +91,9 @@ public class ProductsFormController implements Initializable {
     private Button deleteProductBtn;
     @FXML
     private Button refreshBtn;
+    
+    @FXML
+    private JFXTextField filterInput;
 
     /**
      * Initializes the controller class.
@@ -104,59 +103,144 @@ public class ProductsFormController implements Initializable {
         buildData();
     }
     LocalDate date;
-
+    String add = "add";
+//    String update = "Update Product";
+ 
     @FXML
     private void addProduct(ActionEvent event) {
+        if (add.equals("add")) {
+           
+String sqlDate = purchaseDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            try {
 
-        String sqlDate = purchaseDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                con = DB.getConnection();
+                String sql = "INSERT INTO product(product_name, product_type, description, product_size, buying_price, selling_price, quantity, product_code, purchase_date) VALUES(?,?,?,?,?,?,?,?,?) ";
+                PreparedStatement ps = con.prepareStatement(sql);
+                ps.setString(1, productName.getText());
+                ps.setString(2, productType.getText());
+                ps.setString(3, productDescription.getText());
+                ps.setString(4, productSize.getText());
+                ps.setString(5, buyingPrice.getText());
+                ps.setString(6, sellingPrice.getText());
+                ps.setString(7, productQuantity.getText());
+                ps.setString(8, productCode.getText());
 
-        try {
+                ps.setString(9, sqlDate);
+                int rowsAffected = ps.executeUpdate();
+                if (rowsAffected > 0) {
+                    clearForm();
+                }
 
-            con = DB.getConnection();
-            String sql = "INSERT INTO product(product_name, product_type, description, product_size, buying_price, selling_price, quantity, product_code, purchase_date) VALUES(?,?,?,?,?,?,?,?,?) ";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, productName.getText());
-            ps.setString(2, productType.getText());
-            ps.setString(3, productDescription.getText());
-            ps.setString(4, productSize.getText());
-            ps.setString(5, buyingPrice.getText());
-            ps.setString(6, sellingPrice.getText());
-            ps.setString(7, productQuantity.getText());
-            ps.setString(8, productCode.getText());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else  {
 
-            ps.setString(9, sqlDate);
-            int rowsAffected = ps.executeUpdate();
-            if (rowsAffected > 0) {
-                clearForm();
+            try {
+String sqlDate = purchaseDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                con = DB.getConnection();
+                String sql = "UPDATE product SET product_name = ?, product_type =?, description =?, product_size =?, buying_price =?, selling_price =?, quantity=?, product_code =?, purchase_date = ? where product_id=? ";
+                PreparedStatement ps = con.prepareStatement(sql);
+                
+                ps.setString(1, productName.getText());
+                ps.setString(2, productType.getText());
+                ps.setString(3, productDescription.getText());
+                ps.setString(4, productSize.getText());
+                ps.setString(5, buyingPrice.getText());
+                ps.setString(6, sellingPrice.getText());
+                ps.setString(7, productQuantity.getText());
+                ps.setString(8, productCode.getText());
+                ps.setString(9, sqlDate);
+                ps.setString(10, productSearch.getText());
+                int rowsAffected = ps.executeUpdate();
+                if (rowsAffected > 0) {
+                    clearForm();
+                    addBtn.setText("Add Product");
+                    productSearch.setText("");
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
+    
+    
+    @FXML
+    private void searchProduct(ActionEvent event) {
+                data = FXCollections.observableArrayList();
+        try {
+            String getSearchField = filterInput.getText();
+            //SQL FOR SELECTING ALL OF CUSTOMER
+            String SQL = "SELECT * from product where product_code = '"+getSearchField+"' ";   						//change table name
+            //ResultSet
+            con = DB.getConnection();
+            ResultSet rs = con.createStatement().executeQuery(SQL);
+
+            //* TABLE COLUMN ADDED DYNAMICALLY *
+            for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
+                //We are using non property style for making dynamic table
+                final int j = i;
+                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
+                col.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
+                    public ObservableValue<String> call(TableColumn.CellDataFeatures<ObservableList, String> param) {
+                        return new SimpleStringProperty(param.getValue().get(j).toString());
+                    }
+                });
+
+                productTable.getColumns().addAll(col);			//change table name
+                System.out.println("Column [" + i + "] ");
+            }
+            //* Data added to ObservableList *
+            while (rs.next()) {
+                //Iterate Row
+                ObservableList<String> row = FXCollections.observableArrayList();
+                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+                    //Iterate Column
+                    row.add(rs.getString(i));
+                }
+                System.out.println("Row [1] added " + row);
+                data.add(row);
+
+            }
+
+            //FINALLY ADDED TO TableView
+            productTable.setItems(data);			//change table name
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error on Building Data");
+        }
+        
+    }
+    
+    
 
     private void clearForm() {
         productName.setText("");
+        productType.setText("");
         productCode.setText("");
         productDescription.setText("");
         productSize.setText("");
         productQuantity.setText("");
         buyingPrice.setText("");
         sellingPrice.setText("");
+        purchaseDate.setValue(null);
 
     }
 
     @FXML
     private void allMembersBtn(MouseEvent event) {
     }
+    
+  
 
     @FXML
     private void instructorBtnAction(ActionEvent event) {
     }
 
-    @FXML
-    private void selectTableRowListener(MouseEvent event) {
-    }
 
     @FXML
     private void memberTabAction(MouseEvent event) {
@@ -165,24 +249,31 @@ public class ProductsFormController implements Initializable {
 
     @FXML
     private void getProduct(ActionEvent event) {
-        try {
+         try {
             con = DB.getConnection();
-            String sql = "Select * from product where product_id=?";
+            String sql = "Select * from product where product_id=? OR product_name=?";
             PreparedStatement ps = con.prepareStatement(sql);
             getProductId = productSearch.getText();
             ps.setString(1, getProductId);
+            ps.setString(2, getProductId);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                           productName.setText(rs.getString(1));
-        productCode.setText(rs.getString(2));
-        productDescription.setText("");
-        productSize.setText("");
-        productQuantity.setText("");
-        buyingPrice.setText("");
-        sellingPrice.setText("");
+                productName.setText(rs.getString(2));
+                productType.setText(rs.getString(3));
+                productDescription.setText(rs.getString(4));
+                productSize.setText(rs.getString(4));
+               
+                buyingPrice.setText(rs.getString(5));
+                sellingPrice.setText(rs.getString(6));
+                productQuantity.setText(rs.getString(7));
+                productCode.setText(rs.getString(8));
+                 java.sql.Date d = rs.getDate("purchase_date");
+                purchaseDate.setValue(d.toLocalDate());
                 
-   
+                addBtn.setText("Update Product");
+                add = "update";
+                
             } else {
 
             }
@@ -196,17 +287,17 @@ public class ProductsFormController implements Initializable {
 
     @FXML
     private void deleteProduct(ActionEvent event) {
-        
-              try {
+        System.out.println("enter");
+        try {
+           
             con = DB.getConnection();
-            String sql = "DELETE FROM product where product_id=?";
+            String sql = "DELETE FROM product where product_id= '"+productSearch.getText()+"'";
             PreparedStatement ps = con.prepareStatement(sql);
-            getProductId = productSearch.getText();
-            ps.setString(1, getProductId);
-            int rs = ps.executeUpdate();
+            ps.executeUpdate();
         } catch (Exception e) {
+            e.printStackTrace();
         }
-        
+
     }
     ObservableList<ObservableList> data;
 
@@ -248,6 +339,7 @@ public class ProductsFormController implements Initializable {
 
             //FINALLY ADDED TO TableView
             productTable.setItems(data);			//change table name
+            filterInput.setText("");
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Error on Building Data");
@@ -257,6 +349,7 @@ public class ProductsFormController implements Initializable {
 
     @FXML
     private void refreshBtnAction(ActionEvent event) {
+        productTable.getItems().clear();
         buildData();
     }
 
