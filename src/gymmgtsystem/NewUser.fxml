@@ -35,7 +35,7 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </JFXButton>
-                  <JFXComboBox fx:id="roleCmb" layoutX="374.0" layoutY="296.0" prefHeight="25.0" prefWidth="199.0" promptText="-- Select Role --" />
+                  <JFXComboBox fx:id="roleCmb" layoutX="364.0" layoutY="296.0" prefHeight="25.0" prefWidth="220.0" promptText="-- Select Role --" />
                   <Label layoutX="275.0" layoutY="184.0" text="Full Name" />
                   <JFXTextField fx:id="fullName" focusColor="#01a5e1" layoutX="363.0" layoutY="182.0" prefHeight="25.0" prefWidth="220.0" promptText="Full Name" />
                   <Label layoutX="275.0" layoutY="226.0" text="Password" />
@@ -83,11 +83,12 @@
                         <Font size="1.0" />
                      </font>
                   </Button>
-                  <JFXButton layoutX="374.0" layoutY="387.0" prefHeight="30.0" prefWidth="199.0" style="-fx-background-color: #01A5E1;" text="Update User" textFill="WHITE">
+                  <JFXButton layoutX="374.0" layoutY="387.0" onAction="#updateUserAction" prefHeight="30.0" prefWidth="199.0" style="-fx-background-color: #01A5E1;" text="Update User" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </JFXButton>
+                  <JFXTextField fx:id="userId" layoutX="610.0" layoutY="296.0" prefHeight="25.0" prefWidth="59.0" visible="false" />
                </children>
             </Pane>
             <JFXButton fx:id="closeBtn" layoutX="967.0" onAction="#closeBtnAction" text="x" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0" />

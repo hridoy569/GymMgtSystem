@@ -24,7 +24,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="root" maxHeight="768.0" maxWidth="1366.0" minHeight="768.0" minWidth="1366.0" prefHeight="768.0" prefWidth="1366.0" stylesheets="@../style/scrollBar.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gymmgtsystem.MainFrameController">
@@ -318,14 +317,32 @@
                                  <items>
                                     <MenuItem fx:id="miPopOver" mnemonicParsing="false">
                                        <graphic>
-                                          <AnchorPane prefHeight="225.0" prefWidth="190.0">
+                                          <AnchorPane>
                                              <children>
-                                                <Circle fx:id="circleImgUsr" fill="DODGERBLUE" layoutX="100.0" layoutY="49.0" radius="46.0" stroke="WHITE" strokeType="INSIDE" />
-                                                <Label fx:id="lblUsrNamePopOver" alignment="CENTER" layoutY="107.0" prefHeight="15.0" prefWidth="196.0" text="Full Name" />
-                                                <Label fx:id="lblEmail" alignment="CENTER" layoutX="2.0" layoutY="129.0" prefHeight="15.0" prefWidth="196.0" text="Email" />
-                                                <Label fx:id="lblRoleAs" alignment="CENTER" layoutX="3.0" layoutY="148.0" prefHeight="15.0" prefWidth="196.0" text="Role" />
-                                                <Hyperlink fx:id="createNewUser" alignment="CENTER" layoutX="3.0" layoutY="163.0" onAction="#userDetailsAction" prefHeight="23.0" prefWidth="194.0" text="Edit/Update" />
-                                                <Button fx:id="btnLogOut" layoutX="3.0" layoutY="184.0" mnemonicParsing="false" onAction="#btnLogOut" prefHeight="25.0" prefWidth="196.0" text="LogOut" />
+                                                <Label fx:id="lblUsrNamePopOver" alignment="CENTER" layoutY="107.0" prefHeight="15.0" prefWidth="196.0" text="Full Name" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font name="System Bold Italic" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="lblEmail" alignment="CENTER" layoutX="2.0" layoutY="129.0" prefHeight="15.0" prefWidth="196.0" text="Email" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+                                                   <font>
+                                                      <Font name="System Bold Italic" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="lblRoleAs" alignment="CENTER" layoutX="3.0" layoutY="148.0" prefHeight="15.0" prefWidth="196.0" text="Role" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                                                   <font>
+                                                      <Font name="System Bold Italic" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Hyperlink fx:id="createNewUser" alignment="CENTER" layoutX="3.0" layoutY="163.0" onAction="#userDetailsAction" prefHeight="23.0" prefWidth="194.0" text="Edit/Update" textFill="#f20303" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+                                                   <font>
+                                                      <Font name="System Bold Italic" size="14.0" />
+                                                   </font>
+                                                </Hyperlink>
+                                                <Button fx:id="btnLogOut" layoutX="3.0" layoutY="184.0" mnemonicParsing="false" onAction="#btnLogOut" prefHeight="25.0" prefWidth="196.0" text="LogOut" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0">
+                                                   <font>
+                                                      <Font name="System Bold Italic" size="14.0" />
+                                                   </font></Button>
                                              </children>
                                           </AnchorPane>
                                        </graphic>
@@ -334,8 +351,7 @@
                                  <graphic>
                                     <AnchorPane prefHeight="20.0" prefWidth="120.0">
                                        <children>
-                                          <Circle fx:id="imgUsrTop" fill="DODGERBLUE" layoutX="26.0" layoutY="24.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
-                                          <Label fx:id="loggedInUser" layoutX="52.0" layoutY="17.0" text="Rifat" textFill="WHITE">
+                                          <Label fx:id="loggedInUser" layoutX="52.0" layoutY="17.0" text="Arefin" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="12.0" />
                                              </font>
