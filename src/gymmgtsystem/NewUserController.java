@@ -22,6 +22,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
@@ -80,6 +82,8 @@ public class NewUserController implements Initializable {
     private Button resetFormBtn;
     @FXML
     private Button deleteMemberFormBtn;
+    @FXML
+    private JFXTextField userId;
 
     /**
      * Initializes the controller class.
@@ -94,7 +98,7 @@ public class NewUserController implements Initializable {
     @FXML
     private void createUserBtnAction(ActionEvent event) {
         java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
-        
+
         try {
             String sql = "INSERT into user(user_name, user_fullname, user_password, user_email, user_role, join_date, user_img) VALUES(?,?,?,?,?,?,?)";
             ps = con.prepareStatement(sql);
@@ -145,6 +149,7 @@ public class NewUserController implements Initializable {
     }
 
     private void resetUserDetails() {
+        userId.clear();
         userName.clear();
         fullName.clear();
         password.clear();
@@ -158,16 +163,18 @@ public class NewUserController implements Initializable {
         ps = con.prepareStatement("Select * from user where user_name=?");
         ps.setString(1, userName.getText());
         rs = ps.executeQuery();
-        while(rs.next()){
-        userName.setText(rs.getString(2));
-        fullName.setText(rs.getString(3));
-        password.setText(rs.getString(4));
-        email.setText(rs.getString(5));
-        roleCmb.setValue(rs.getString(6));
-        Image convertToJavaFXImage = convertToJavaFXImage(rs.getBytes(8), 180, 180);
-        profilePhoto.setImage(convertToJavaFXImage);
+        while (rs.next()) {
+            userId.setText(rs.getString(1));
+            userName.setText(rs.getString(2));
+            fullName.setText(rs.getString(3));
+            password.setText(rs.getString(4));
+            email.setText(rs.getString(5));
+            roleCmb.setValue(rs.getString(6));
+            Image convertToJavaFXImage = convertToJavaFXImage(rs.getBytes(8), 180, 180);
+            profilePhoto.setImage(convertToJavaFXImage);
         }
     }
+
     private static Image convertToJavaFXImage(byte[] raw, final int width, final int height) {
         WritableImage image = new WritableImage(width, height);
         try {
@@ -175,7 +182,7 @@ public class NewUserController implements Initializable {
             BufferedImage read = ImageIO.read(bis);
             image = SwingFXUtils.toFXImage(read, null);
         } catch (IOException ex) {
-//            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NewUserController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return image;
     }
@@ -187,6 +194,30 @@ public class NewUserController implements Initializable {
 
     @FXML
     private void deleteMemberFormBtnAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void updateUserAction(ActionEvent event) throws SQLException, IOException {
+        java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
+
+        try {
+            ps = con.prepareStatement("update user set user_name=?, user_fullname=?, user_password=?, user_email=?, user_role=?, join_date=?, user_img=? where user_id = ?");
+            ps.setString(1, userName.getText());
+            ps.setString(2, fullName.getText());
+            ps.setString(3, password.getText());
+            ps.setString(4, email.getText());
+            ps.setString(5, roleCmb.getSelectionModel().getSelectedItem().toString());
+            ps.setTimestamp(6, date);
+            ps.setBinaryStream(7, proPic, proPic.available());
+            ps.setString(8, userId.getText());
+            ps.executeUpdate();
+
+            resetUserDetails();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Update error");
+        }
+
     }
 
 }

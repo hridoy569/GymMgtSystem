@@ -36,19 +36,7 @@ public class TrainerFormController implements Initializable {
     @FXML
     private Tab addMemberTab;
     @FXML
-    private JFXTextField fname;
-    @FXML
-    private JFXTextField lname;
-    @FXML
-    private JFXTextField lname1;
-    @FXML
     private JFXTextField lname11;
-    @FXML
-    private JFXComboBox<?> bodyshapCombo11;
-    @FXML
-    private JFXButton getBtn122;
-    @FXML
-    private JFXButton getBtn1211;
     @FXML
     private Tab membershipTab;
     @FXML
@@ -90,13 +78,17 @@ public class TrainerFormController implements Initializable {
     @FXML
     private Button addShiftBtn;
     @FXML
-    private Button addShiftBtn1;
-    @FXML
-    private Button addShiftBtn2;
-    @FXML
-    private Button addShiftBtn21;
-    @FXML
     private Button addShiftBtn22;
+    @FXML
+    private JFXTextField mealName;
+    @FXML
+    private JFXTextField foodName;
+    @FXML
+    private JFXTextField quantity;
+    @FXML
+    private JFXTextField measure;
+    @FXML
+    private JFXComboBox<?> mealPlanCmb;
 
     /**
      * Initializes the controller class.
@@ -128,6 +120,26 @@ public class TrainerFormController implements Initializable {
 
     @FXML
     private void addShiftBtnAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void addMealAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void addMealTypeAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void editMealAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void deleteMealAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void bodyShapeAction(ActionEvent event) {
     }
     
 }

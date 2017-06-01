@@ -5,6 +5,7 @@
  */
 package gymmgtsystem;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToggleButton;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -46,7 +47,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.shape.Circle;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -90,13 +90,13 @@ public class MainFrameController implements Initializable {
     private StackPane stackPane;
     int countToggleView = 0;
     int countMemberBtn = 0;
-    int countShiftBtn=0;
-    int countPackagesBtn=0;
-    int countTrainerBtn=0;
-    int countProductBtn=0;
-    int countInstrumentsBtn=0;
-    int countAccountsBtn=0;
-    int countReportsBtn=0;
+    int countShiftBtn = 0;
+    int countPackagesBtn = 0;
+    int countTrainerBtn = 0;
+    int countProductBtn = 0;
+    int countInstrumentsBtn = 0;
+    int countAccountsBtn = 0;
+    int countReportsBtn = 0;
     int countSettingsBtn = 0;
     int countUserBtn = 0;
     @FXML
@@ -136,7 +136,7 @@ public class MainFrameController implements Initializable {
     private int hour;
     private int second;
     private int pam;
-    
+
     private int wday;
     private int month;
     private int dday;
@@ -162,15 +162,11 @@ public class MainFrameController implements Initializable {
     @FXML
     private MenuItem miPopOver;
     @FXML
-    private Circle circleImgUsr;
-    @FXML
     private Label lblUsrNamePopOver;
     @FXML
     private Label lblRoleAs;
     @FXML
     private Button btnLogOut;
-    @FXML
-    private Circle imgUsrTop;
     @FXML
     private Hyperlink createNewUser;
     @FXML
@@ -187,19 +183,19 @@ public class MainFrameController implements Initializable {
     private Label bphoneLabel;
     @FXML
     private Label bemailLabel;
-   
+
     public void setUsrNameMedia(String name) {
         loggedInUser.setText(name);
     }
-    
+
     public void setFullnameMedia(String name) {
         lblUsrNamePopOver.setText(name);
     }
-    
+
     public void setEmailMedia(String name) {
         lblEmail.setText(name);
     }
-    
+
     public void setRoleMedia(String name) {
         lblRoleAs.setText(name);
     }
@@ -452,7 +448,6 @@ public class MainFrameController implements Initializable {
 //        }
 //
 //    }
-
     @FXML
     private void toggleAttStatusAction(MouseEvent event) {
 
@@ -466,69 +461,106 @@ public class MainFrameController implements Initializable {
             System.out.println("from main in");
         }
     }
-    
-    
-    void clock(){
-    
+
+    void clock() {
+
         Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             Calendar cal = Calendar.getInstance();
             second = cal.get(Calendar.SECOND);
             minute = cal.get(Calendar.MINUTE);
             hour = cal.get(Calendar.HOUR);
-            if(hour==0){hour=12;};
-            
+            if (hour == 0) {
+                hour = 12;
+            };
+
             pam = cal.get(Calendar.AM_PM);
             String pmam;
-            if (pam== 0) {
+            if (pam == 0) {
                 pmam = "AM";
             } else {
                 pmam = "PM";
             }
-            
+
             wday = cal.get(Calendar.DAY_OF_WEEK);
-            String weekDay="";
+            String weekDay = "";
             month = cal.get(Calendar.MONTH);
-            String monthString="";
+            String monthString = "";
             dday = cal.get(Calendar.DAY_OF_MONTH);
             year = cal.get(Calendar.YEAR);
-            
-            if (wday==7) {weekDay= "Saturday";} else if(wday==1) {weekDay="Sunday";} else if(wday==2) {weekDay="Monday";} else if(wday==3) {weekDay="Tuesday";} else if(wday==4) {weekDay="Wednesday";} else if(wday==5) {weekDay="Thursday";} else if(wday==6) {weekDay="Friday";};
-            if (month==0) {monthString= "Jan";} else if(month==1) {monthString= "Feb";} else if(month==2) {monthString= "Mar";} else if(month==3) {monthString= "App";} else if(month==4) {monthString= "May";} else if(month==5) {monthString= "Jun";} else if(month==6) {monthString= "Jul";} else if(month==7) {monthString= "Aug";} else if(month==8) {monthString= "Sep";} else if(month==9) {monthString= "Oct";} else if(month==10) {monthString= "Nov";} else if(month==11) {monthString= "Dec";}
-            
-            if (Integer.toString(hour).length()==1 && Integer.toString(minute).length()==2 && Integer.toString(second).length()==2){
-                time.setText("0"+hour + ":" + minute + ":" + second+" "+pmam);
-            }else if(Integer.toString(hour).length()==2 && Integer.toString(minute).length()==1 && Integer.toString(second).length()==2){
-                time.setText(hour + ":" + "0"+minute + ":" + second+" "+pmam);
-            
-            }else if(Integer.toString(hour).length()==2 && Integer.toString(minute).length()==2 && Integer.toString(second).length()==1){
-                time.setText(hour + ":" + minute + ":" + "0"+second+" "+pmam);
-            
-            }else if(Integer.toString(hour).length()==1 && Integer.toString(minute).length()==1 && Integer.toString(second).length()==2){
-                time.setText("0"+hour + ":" + "0"+minute + ":" + second+" "+pmam);
-            
-            }else if(Integer.toString(hour).length()==1 && Integer.toString(minute).length()==2 && Integer.toString(second).length()==1){
-                time.setText("0"+hour + ":" + minute + ":" + "0"+second+" "+pmam);
-            
-            }else if(Integer.toString(hour).length()==2 && Integer.toString(minute).length()==1 && Integer.toString(second).length()==1){
-                time.setText(hour + ":" + "0"+minute + ":" + "0"+second+" "+pmam);
-            
-            }else if(Integer.toString(hour).length()==1  && Integer.toString(minute).length()==1 && Integer.toString(second).length()==1){
-                time.setText("0"+hour + ":" + "0"+minute + ":" + "0"+second+" "+pmam);
-            
-            }else{
-                time.setText(hour + ":" + minute + ":" + second+" "+pmam);
+
+            if (wday == 7) {
+                weekDay = "Saturday";
+            } else if (wday == 1) {
+                weekDay = "Sunday";
+            } else if (wday == 2) {
+                weekDay = "Monday";
+            } else if (wday == 3) {
+                weekDay = "Tuesday";
+            } else if (wday == 4) {
+                weekDay = "Wednesday";
+            } else if (wday == 5) {
+                weekDay = "Thursday";
+            } else if (wday == 6) {
+                weekDay = "Friday";
+            };
+            if (month == 0) {
+                monthString = "Jan";
+            } else if (month == 1) {
+                monthString = "Feb";
+            } else if (month == 2) {
+                monthString = "Mar";
+            } else if (month == 3) {
+                monthString = "App";
+            } else if (month == 4) {
+                monthString = "May";
+            } else if (month == 5) {
+                monthString = "Jun";
+            } else if (month == 6) {
+                monthString = "Jul";
+            } else if (month == 7) {
+                monthString = "Aug";
+            } else if (month == 8) {
+                monthString = "Sep";
+            } else if (month == 9) {
+                monthString = "Oct";
+            } else if (month == 10) {
+                monthString = "Nov";
+            } else if (month == 11) {
+                monthString = "Dec";
             }
-                
-            
-            date.setText(weekDay + ", " + monthString + " " + dday+", "+year);
-            
+
+            if (Integer.toString(hour).length() == 1 && Integer.toString(minute).length() == 2 && Integer.toString(second).length() == 2) {
+                time.setText("0" + hour + ":" + minute + ":" + second + " " + pmam);
+            } else if (Integer.toString(hour).length() == 2 && Integer.toString(minute).length() == 1 && Integer.toString(second).length() == 2) {
+                time.setText(hour + ":" + "0" + minute + ":" + second + " " + pmam);
+
+            } else if (Integer.toString(hour).length() == 2 && Integer.toString(minute).length() == 2 && Integer.toString(second).length() == 1) {
+                time.setText(hour + ":" + minute + ":" + "0" + second + " " + pmam);
+
+            } else if (Integer.toString(hour).length() == 1 && Integer.toString(minute).length() == 1 && Integer.toString(second).length() == 2) {
+                time.setText("0" + hour + ":" + "0" + minute + ":" + second + " " + pmam);
+
+            } else if (Integer.toString(hour).length() == 1 && Integer.toString(minute).length() == 2 && Integer.toString(second).length() == 1) {
+                time.setText("0" + hour + ":" + minute + ":" + "0" + second + " " + pmam);
+
+            } else if (Integer.toString(hour).length() == 2 && Integer.toString(minute).length() == 1 && Integer.toString(second).length() == 1) {
+                time.setText(hour + ":" + "0" + minute + ":" + "0" + second + " " + pmam);
+
+            } else if (Integer.toString(hour).length() == 1 && Integer.toString(minute).length() == 1 && Integer.toString(second).length() == 1) {
+                time.setText("0" + hour + ":" + "0" + minute + ":" + "0" + second + " " + pmam);
+
+            } else {
+                time.setText(hour + ":" + minute + ":" + second + " " + pmam);
+            }
+
+            date.setText(weekDay + ", " + monthString + " " + dday + ", " + year);
+
         }),
                 new KeyFrame(Duration.seconds(1))
         );
         clock.setCycleCount(Animation.INDEFINITE);
         clock.play();
-    
-    
+
     }
 
 //    private void shiftBtnAction(MouseEvent e) {
@@ -563,7 +595,6 @@ public class MainFrameController implements Initializable {
 //        accountsBtn.setStyle("-fx-background-color: null; -fx-background-repeat:no-repeat;");
 //        reportsBtn.setStyle("-fx-background-color: null; -fx-background-repeat:no-repeat;");
 //    }
-
 //    private void packagesBtnAction(MouseEvent e) {
 //        
 //        if (e.getClickCount() >= 1) {
@@ -596,7 +627,6 @@ public class MainFrameController implements Initializable {
 //        accountsBtn.setStyle("-fx-background-color: null; -fx-background-repeat:no-repeat;");
 //        reportsBtn.setStyle("-fx-background-color: null; -fx-background-repeat:no-repeat;");
 //    }
-
     @FXML
     private void trainerBtnAction(MouseEvent e) {
         if (e.getClickCount() >= 1) {
@@ -605,15 +635,14 @@ public class MainFrameController implements Initializable {
         }
 
 //        if (countTrainerBtn <= 1) {
-
-            try {
-                trainerForm = FXMLLoader.load(getClass().getResource("TrainerForm.fxml"));
-                stack4DialogLayout.getChildren().add(trainerForm);
-                stage.setMaximized(true);
-            } catch (IOException ex) {
-                Logger.getLogger(MainFrameController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            System.out.println("trainerForm added");
+        try {
+            trainerForm = FXMLLoader.load(getClass().getResource("TrainerForm.fxml"));
+            stack4DialogLayout.getChildren().add(trainerForm);
+            stage.setMaximized(true);
+        } catch (IOException ex) {
+            Logger.getLogger(MainFrameController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("trainerForm added");
 //        } else {
 //            trainerForm.toFront();
 //            stage.setMaximized(true);
@@ -762,7 +791,6 @@ public class MainFrameController implements Initializable {
         reportsBtn.setStyle("-fx-background-color: null; -fx-background-image:url(img/movies.png); -fx-background-repeat:no-repeat;");
     }
 
-
     @FXML
     private void btnLogOut(ActionEvent event) throws IOException {
         Stage current = (Stage) close.getScene().getWindow();
@@ -778,7 +806,7 @@ public class MainFrameController implements Initializable {
     private void userDetailsAction(ActionEvent e) throws IOException {
         nextStage(GymMgtSystem.NewUser, "", true);
     }
-    
+
     private void nextStage(String fxml, String title, boolean resizable) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(fxml));
         Stage stage = new Stage();
@@ -788,10 +816,10 @@ public class MainFrameController implements Initializable {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setResizable(resizable);
         stage.show();
-        
+
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2); 
-        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);  
+        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
 
     }
 
@@ -828,7 +856,7 @@ public class MainFrameController implements Initializable {
         reportsBtn.setStyle("-fx-background-color: null; -fx-background-repeat:no-repeat;");
 //        settingsBtn.setStyle("-fx-background-color: null; -fx-background-image:url(img/movies.png); -fx-background-repeat:no-repeat;");
     }
-    
+
     private void loadLogo() {
         try {
             Connection con = DB.getConnection();
@@ -838,8 +866,8 @@ public class MainFrameController implements Initializable {
             while (rs.next()) {
                 bnameLabel.setText(rs.getString("businessName"));
                 baddressLabel.setText(rs.getString("businessAddress"));
-                bphoneLabel.setText("Phone: "+rs.getString("businessPhone"));
-                bemailLabel.setText("Email: "+rs.getString("businessEmail"));
+                bphoneLabel.setText("Phone: " + rs.getString("businessPhone"));
+                bemailLabel.setText("Email: " + rs.getString("businessEmail"));
                 Image convertToJavaFXImage = convertToJavaFXImage(rs.getBytes("businessLogo"), 250, 60);
                 logoFrame.setImage(convertToJavaFXImage);
             }
@@ -860,7 +888,4 @@ public class MainFrameController implements Initializable {
         return image;
     }
 
-    
-
-    
 }
