@@ -102,11 +102,13 @@ public class SettingsFormController implements Initializable {
     private AnchorPane rootPane;
     String colorCode;
     @FXML
-    private Label themeLabel;
+    private HBox themeLabel;
     @FXML
     private Button addShiftBtn;
     @FXML
     private Button addShiftBtn1;
+    @FXML
+    private Label themeLabel1;
 
     /**
      * Initializes the controller class.
@@ -163,7 +165,7 @@ public class SettingsFormController implements Initializable {
                 dbImage = rs.getBytes("businessLogo");
                 Image convertToJavaFXImage = convertToJavaFXImage(dbImage, 250, 60);
                 changeLogoView.setImage(convertToJavaFXImage);
-                bgBlack.setStyle("-fx-background-color: #222");
+                bgBlack.setStyle("-fx-background-color: "+colorCode);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -292,6 +294,8 @@ public class SettingsFormController implements Initializable {
 
     @FXML
     private void defaultColorAction(ActionEvent event) {
+        themeLabel.setBackground(new Background(new BackgroundFill(Paint.valueOf("#222"), CornerRadii.EMPTY, Insets.EMPTY)));
+        colorPicker.setValue(Color.valueOf("#222"));
          try {
             String sql = "UPDATE color SET color_code=? where id=1";
             ps = con.prepareStatement(sql);

@@ -1,15 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import application.Card?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="590.0" prefWidth="1366.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gymmgtsystem.AccountsController">
+
+<AnchorPane id="AnchorPane" prefHeight="590.0" prefWidth="1366.0" style="-fx-background-color: #fff;" stylesheets="@../style/winDec.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gymmgtsystem.AccountsController">
    <children>
-      <Label layoutX="158.0" layoutY="98.0" prefHeight="63.0" prefWidth="182.0" text="Accounts">
-         <font>
-            <Font name="System Bold" size="29.0" />
-         </font>
-      </Label>
+      <StackPane fx:id="accountsStackPane" layoutX="473.0" layoutY="195.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane style="-fx-background-color: #fff;">
+               <children>
+                  <VBox layoutX="483.0" layoutY="205.0" spacing="70.0">
+                     <children>
+                        <Card onMouseClicked="#revenueAction" prefHeight="55.0" prefWidth="400.0" style="-fx-background-color: #00A8E7;">
+                           <children>
+                              <Label text="R e v e n u e s" textFill="WHITE">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Card>
+                        <Card onMouseClicked="#expenseAction" prefHeight="55.0" prefWidth="400.0" style="-fx-background-color: #00A8E7;">
+                           <children>
+                              <Label text="E x p e n s e s" textFill="WHITE">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Card>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>

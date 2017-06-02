@@ -65,7 +65,7 @@ public class AllMembersTableController implements Initializable {
     private ObservableList<ObservableList> data;
     ObservableList<String> row;
     @FXML
-    private TableView <ObservableList> memberTable;
+    private TableView<ObservableList> memberTable;
     @FXML
     private Button reloadTableBtn;
     private String id;
@@ -80,7 +80,7 @@ public class AllMembersTableController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         con = DB.getConnection();
         buildData();
-        
+
         filterInput.textProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
@@ -89,7 +89,7 @@ public class AllMembersTableController implements Initializable {
 
         });
     }
-    
+
     public void filterMovieList(String oldValue, String newValue) {
         ObservableList<ObservableList> filteredListIncrease = FXCollections.observableArrayList();
         ObservableList<ObservableList> filteredListDecrese = FXCollections.observableArrayList();
@@ -111,7 +111,7 @@ public class AllMembersTableController implements Initializable {
                 String filterLname = member.get(2).toString();
                 String filterEmail = member.get(5).toString();
                 String filterCell = member.get(6).toString();
-                if (filterId.toUpperCase().contains(newValue) || filterFname.toUpperCase().contains(newValue) || filterLname.toUpperCase().contains(newValue)|| filterEmail.toUpperCase().contains(newValue)|| filterCell.toUpperCase().contains(newValue) ) {
+                if (filterId.toUpperCase().contains(newValue) || filterFname.toUpperCase().contains(newValue) || filterLname.toUpperCase().contains(newValue) || filterEmail.toUpperCase().contains(newValue) || filterCell.toUpperCase().contains(newValue)) {
                     filteredListDecrese.add(member);
                 }
             }
@@ -132,7 +132,7 @@ public class AllMembersTableController implements Initializable {
                 String filterLname = member.get(2).toString();
                 String filterEmail = member.get(5).toString();
                 String filterCell = member.get(6).toString();
-                if (filterId.toUpperCase().contains(newValue) || filterFname.toUpperCase().contains(newValue) || filterLname.toUpperCase().contains(newValue)|| filterEmail.toUpperCase().contains(newValue)|| filterCell.toUpperCase().contains(newValue) ) {
+                if (filterId.toUpperCase().contains(newValue) || filterFname.toUpperCase().contains(newValue) || filterLname.toUpperCase().contains(newValue) || filterEmail.toUpperCase().contains(newValue) || filterCell.toUpperCase().contains(newValue)) {
                     filteredListIncrease.add(member);
 
                 }
@@ -154,13 +154,12 @@ public class AllMembersTableController implements Initializable {
         System.out.println(id);
     }
 
-
     @FXML
     private void deleteBtnAction(ActionEvent event) {
         System.out.println("delete");
         JFXDialogLayout content = new JFXDialogLayout();
         content.setHeading(new Text("Confirmation to " + "delete"));
-        content.setBody(new Text("Do you want to delete Member ID "+id
+        content.setBody(new Text("Do you want to delete Member ID " + id
                 + " ? If your answer is yes press Okay button "
                 + "else click outside of this box."));
         JFXDialog dialog = new JFXDialog(viewStackPane, content, JFXDialog.DialogTransition.CENTER);
@@ -176,14 +175,15 @@ public class AllMembersTableController implements Initializable {
                     ps = con.prepareStatement("delete from member where member_id=?");
                     ps.setString(1, id);
                     ps.executeUpdate();
+                    reloadData();
                     dialog.close();
                 } catch (SQLException ex) {
                     Logger.getLogger(MembersFormController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+
             }
 
-           });
+        });
         content.setActions(button);
         dialog.show();
     }
@@ -232,15 +232,17 @@ public class AllMembersTableController implements Initializable {
 
     @FXML
     private void reloadTableBtnAction(MouseEvent event) {
-        memberTable.refresh();
-        data.clear();
-        row.clear();
-        filterInput.clear();
-        buildData();
-        
+        reloadData();
+
     }
 
-    
-    
+    public void reloadData() {
+        for (int i = 0; i < memberTable.getColumns().size(); i++) {
+            memberTable.getColumns().get(i).setVisible(false);
+        }
+
+        filterInput.clear();
+        buildData();
+    }
 
 }

@@ -15,7 +15,7 @@
          <children>
             <AnchorPane maxHeight="490.0" maxWidth="1156.0" prefHeight="490.0" prefWidth="1156.0" style="-fx-background-color: #fff;">
                <children>
-                  <TableView fx:id="memberTable" layoutY="25.0" onMouseClicked="#selectTableRowListener" prefHeight="440.0" prefWidth="810.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="45.0" />
+                  <TableView fx:id="memberTable" onMouseClicked="#selectTableRowListener" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="45.0" />
                   <TextField fx:id="filterInput" layoutX="173.0" layoutY="13.0" prefHeight="25.0" prefWidth="778.0" AnchorPane.leftAnchor="173.0" AnchorPane.rightAnchor="205.0" AnchorPane.topAnchor="13.0" />
                   <Label layoutX="57.0" layoutY="17.0" prefHeight="25.0" text="Search Members" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="13.0">
                      <font>
