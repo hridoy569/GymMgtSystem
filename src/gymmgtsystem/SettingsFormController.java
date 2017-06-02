@@ -30,6 +30,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -87,10 +88,6 @@ public class SettingsFormController implements Initializable {
     private byte[] dbImage;
     private String profile_id;
     @FXML
-    private JFXButton createPkgBtn;
-    @FXML
-    private JFXButton createShiftBtn;
-    @FXML
     private StackPane settingsStackPane;
     int countcreatePkgBtnBtn = 0;
     private AnchorPane shiftForm;
@@ -106,6 +103,10 @@ public class SettingsFormController implements Initializable {
     String colorCode;
     @FXML
     private Label themeLabel;
+    @FXML
+    private Button addShiftBtn;
+    @FXML
+    private Button addShiftBtn1;
 
     /**
      * Initializes the controller class.
@@ -300,4 +301,5 @@ public class SettingsFormController implements Initializable {
             e.printStackTrace();
         }
     }
+
 }

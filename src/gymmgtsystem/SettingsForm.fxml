@@ -3,6 +3,8 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXColorPicker?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -12,47 +14,43 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="rootPane" maxWidth="1366.0" prefHeight="590.0" prefWidth="1366.0" stylesheets="@../style/winDec.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gymmgtsystem.SettingsFormController">
    <children>
       <AnchorPane layoutX="70.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox layoutX="232.0" layoutY="70.0" prefHeight="450.0" prefWidth="3.0" style="-fx-background-color: #ccc;" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="230.0" AnchorPane.topAnchor="70.0" />
-            <VBox layoutX="23.0" layoutY="101.0" spacing="20.0">
+            <VBox layoutX="451.0" layoutY="70.0" prefHeight="450.0" prefWidth="1.0" style="-fx-background-color: #333;" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="440.0" AnchorPane.topAnchor="70.0" />
+            <StackPane fx:id="settingsStackPane" layoutX="288.0" layoutY="80.0" maxHeight="500.0" prefHeight="500.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="450.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="70.0">
                <children>
-                  <JFXButton fx:id="createPkgBtn" onMouseClicked="#createPkgBtnAction" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #01A5E1;" text="Create Package" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton fx:id="createShiftBtn" onMouseClicked="#createShiftBtnAction" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #01A5E1;" text="Create Shift" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </JFXButton>
-               </children>
-            </VBox>
-            <StackPane fx:id="settingsStackPane" layoutX="288.0" layoutY="80.0" maxHeight="500.0" maxWidth="1000.0" minHeight="500.0" minWidth="1000.0" prefHeight="500.0" prefWidth="1000.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="260.0" AnchorPane.topAnchor="45.0">
-               <children>
-                  <Pane prefHeight="425.0" prefWidth="842.0" style="-fx-background-color: #fff;">
+                  <Pane style="-fx-background-color: #fff;">
                      <children>
-                        <Label layoutX="98.0" layoutY="171.0" text="Business Name" />
-                        <JFXTextField fx:id="bname" focusColor="#01a5e1" layoutX="273.0" layoutY="167.0" prefHeight="25.0" prefWidth="160.0" />
-                        <Label layoutX="98.0" layoutY="220.0" text="Address" />
-                        <Label layoutX="22.0" layoutY="6.0" text="Customize Business Profile">
+                        <Label layoutX="98.0" layoutY="171.0" text="Business Name">
                            <font>
-                              <Font name="System Bold" size="18.0" />
+                              <Font size="14.0" />
+                           </font></Label>
+                        <JFXTextField fx:id="bname" focusColor="#01a5e1" layoutX="273.0" layoutY="167.0" prefHeight="25.0" prefWidth="160.0" />
+                        <Label layoutX="98.0" layoutY="220.0" text="Address">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Label>
+                        <Label layoutX="99.0" layoutY="24.0" text="Customize Business Profile">
+                           <font>
+                              <Font size="15.0" />
                            </font>
                         </Label>
-                        <Line endX="350.0" fill="BLACK" layoutX="233.0" layoutY="33.0" scaleX="1.5" startX="-100.0" strokeMiterLimit="11.0" />
-                        <Label layoutX="98.0" layoutY="275.0" text="Phone" />
-                        <Label layoutX="98.0" layoutY="333.0" text="Email" />
+                        <Label layoutX="98.0" layoutY="275.0" text="Phone">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Label>
+                        <Label layoutX="98.0" layoutY="333.0" text="Email">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Label>
                         <JFXTextField fx:id="bphone" focusColor="#01a5e1" layoutX="273.0" layoutY="271.0" prefHeight="25.0" prefWidth="160.0" />
                         <JFXTextField fx:id="baddress" focusColor="#01a5e1" layoutX="273.0" layoutY="216.0" prefHeight="25.0" prefWidth="160.0" />
                         <JFXTextField fx:id="bemail" focusColor="#01a5e1" layoutX="273.0" layoutY="321.0" prefHeight="25.0" prefWidth="160.0" />
-                        <AnchorPane layoutX="240.0" layoutY="76.0">
+                        <AnchorPane layoutX="273.0" layoutY="78.0">
                            <children>
                               <ImageView fitHeight="60.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -63,62 +61,118 @@
                               <ImageView fx:id="changeLogoView" fitHeight="60.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </AnchorPane>
-                        <Label layoutX="98.0" layoutY="98.0" text="Business Logo" />
-                        <JFXButton fx:id="updateBtn" layoutX="457.0" layoutY="371.0" onAction="#updateBtnAction" prefHeight="25.0" prefWidth="115.0" style="-fx-background-color: #01A5E1;" text="Update" textFill="WHITE">
+                        <Label layoutX="98.0" layoutY="98.0" text="Business Logo">
                            <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXButton fx:id="getProfileBtn" layoutX="178.0" layoutY="371.0" onAction="#getProfileBtnAction" prefHeight="25.0" prefWidth="115.0" style="-fx-background-color: #01A5E1;" text="Get Profile" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXButton layoutX="316.0" layoutY="371.0" onAction="#resetBtnAction" prefHeight="25.0" prefWidth="115.0" style="-fx-background-color: #01A5E1;" text="Reset Form" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXButton layoutX="502.0" layoutY="77.0" onAction="#browseBtnAction" prefHeight="60.0" prefWidth="70.0" style="-fx-background-color: #01A5E1;" text="Browse Logo" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </JFXButton>
-                        <Label layoutX="587.0" layoutY="375.0" text="**Press Home to see changes!**" />
+                              <Font size="14.0" />
+                           </font></Label>
+                        <HBox layoutX="103.0" layoutY="383.0" spacing="5.0">
+                           <children>
+                              <JFXButton fx:id="getProfileBtn" onAction="#getProfileBtnAction" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #01A5E1;" text="Get Profile" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton onAction="#resetBtnAction" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #01A5E1;" text="Reset Form" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton onAction="#browseBtnAction" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #01A5E1;" text="Browse" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton fx:id="updateBtn" onAction="#updateBtnAction" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #01A5E1;" text="Update" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                        <Label layoutX="532.0" layoutY="387.0" text="**Press Home to see changes!**" />
+                        <HBox layoutX="98.0" layoutY="44.0" prefHeight="1.0" prefWidth="611.0" style="-fx-background-color: #333;" />
                      </children>
                   </Pane>
                </children>
             </StackPane>
-            <VBox layoutX="23.0" layoutY="306.0" spacing="20.0">
+            <VBox layoutX="75.0" layoutY="279.0" spacing="20.0">
                <children>
-                  <Label fx:id="themeLabel" alignment="CENTER" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #fff;" text="Change Theme">
+                  <Label fx:id="themeLabel" alignment="CENTER" prefHeight="50.0" prefWidth="295.0" style="-fx-background-color: #fff;" text="Change Theme">
                      <effect>
                         <DropShadow height="5.0" radius="2.0" width="5.0" />
                      </effect>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </Label>
-                  <HBox>
+                  <HBox spacing="10.0">
                      <children>
-                        <Label prefHeight="25.0" prefWidth="105.0" text="Color">
+                        <Label prefHeight="25.0" prefWidth="50.0" text="Color">
                            <font>
-                              <Font name="System Bold" size="12.0" />
+                              <Font size="14.0" />
                            </font>
                         </Label>
                         <JFXColorPicker fx:id="colorPicker" onAction="#colorPickerAction" />
+                        <JFXButton fx:id="okBtn" onAction="#okBtnAction" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #01A5E1;" text="Change" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton onAction="#defaultColorAction" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #01A5E1;" text="Default" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </JFXButton>
                      </children>
                   </HBox>
-                  <JFXButton fx:id="okBtn" onAction="#okBtnAction" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #01A5E1;" text="Change" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton layoutX="10.0" layoutY="100.0" onAction="#defaultColorAction" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #01A5E1;" text="Default Color" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </JFXButton>
                </children>
             </VBox>
-            <Label layoutX="59.0" layoutY="476.0" text="**Restart required!**" />
+            <Label layoutX="242.0" layoutY="386.0" text="**Restart required!**" />
+            <Label layoutX="43.0" layoutY="31.0" text="Software Settings">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <HBox layoutX="43.0" layoutY="71.0" prefHeight="1.0" prefWidth="359.0" style="-fx-background-color: #333;" />
+            <VBox layoutX="75.0" layoutY="157.0" prefHeight="60.0" prefWidth="295.0" spacing="20.0">
+               <children>
+                  <HBox>
+                     <children>
+                        <Label prefHeight="16.0" prefWidth="279.0" text="Create Package">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="addShiftBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onMouseClicked="#createPkgBtnAction" prefHeight="16.0" prefWidth="16.0" styleClass="decoration-button-addPlus" textAlignment="CENTER">
+                           <font>
+                              <Font size="1.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets top="2.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="1.0" prefWidth="359.0" style="-fx-background-color: #333;" />
+                  <HBox>
+                     <children>
+                        <Label prefHeight="16.0" prefWidth="279.0" text="Create Shift">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="addShiftBtn1" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onMouseClicked="#createShiftBtnAction" prefHeight="16.0" prefWidth="16.0" styleClass="decoration-button-addPlus" textAlignment="CENTER">
+                           <font>
+                              <Font size="1.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets top="2.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
          </children>
       </AnchorPane>
       <VBox fx:id="sidePane" alignment="CENTER" prefHeight="590.0" prefWidth="70.0" style="-fx-background-color: #222;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
