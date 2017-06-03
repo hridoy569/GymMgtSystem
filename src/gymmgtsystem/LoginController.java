@@ -17,6 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,6 +27,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -56,13 +60,17 @@ public class LoginController implements Initializable {
     private JFXPasswordField upass;
     @FXML
     private JFXComboBox<String> urole;
+    @FXML
+    private Label businessName;
+    @FXML
+    private ImageView gif;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        con = DB.getConnection();
         FadeTransition fadeIn = new FadeTransition(Duration.seconds(1.4), rootPane);
         fadeIn.setFromValue(0);
         fadeIn.setToValue(1);
@@ -72,7 +80,7 @@ public class LoginController implements Initializable {
           ObservableList<String> genreList = FXCollections.observableArrayList("Admin", "User");
         urole.setItems(genreList);
         urole.getSelectionModel().selectFirst();
-
+        loadBusinessProfile();
     }
 
     private void nextStage(String fxml, String title, boolean resizable) throws IOException {
@@ -92,10 +100,21 @@ public class LoginController implements Initializable {
 
     @FXML
     public void loginAction(ActionEvent event) throws SQLException {
+        gif.setVisible(true);
+        PauseTransition pauseTransition = new PauseTransition();
+        pauseTransition.setDuration(Duration.seconds(3));
+        pauseTransition.setOnFinished(ev -> {
+            doLogin(event);
 
+        });
+        pauseTransition.play();
+        
+
+    }
+
+    public void doLogin(ActionEvent event) {
         try {
             String roleValue = urole.getSelectionModel().getSelectedItem().toString();
-            con = DB.getConnection();
             String sql = "SELECT * FROM user WHERE user_name= ? AND user_password= ?  AND user_role = ? ";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, uname.getText());
@@ -123,14 +142,27 @@ public class LoginController implements Initializable {
                 st.setMaximized(true);
                 st.setTitle("Gym Management System");
 //                st.getIcons().add(new Image("/image/icon.png"));
-                st.initStyle(StageStyle.UNDECORATED);
-                st.show();
+st.initStyle(StageStyle.UNDECORATED);
+st.show();
             }
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Login error");
         }
-
+    }
+    
+    private void loadBusinessProfile() {
+        try {
+            
+            String sql = "SELECT businessName FROM business_profile";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                businessName.setText(rs.getString("businessName"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

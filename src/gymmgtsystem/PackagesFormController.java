@@ -32,7 +32,6 @@ import util.DB;
  */
 public class PackagesFormController implements Initializable {
 
-    Connection con = null;
 
     @FXML
     private JFXTextField packageName;
@@ -62,6 +61,12 @@ public class PackagesFormController implements Initializable {
     private TableColumn<?, ?> serialColumn1;
     @FXML
     private JFXButton closeBtn;
+    @FXML
+    private AnchorPane rootPane;
+    Connection con = null;
+    PreparedStatement ps;
+    ResultSet rs;
+    private String colorCode;
 
     /**
      * Initializes the controller class.
@@ -70,6 +75,8 @@ public class PackagesFormController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         showPackages();
+        con = DB.getConnection();
+        changeThemeColor();
     }
 
     @FXML
@@ -118,6 +125,20 @@ public class PackagesFormController implements Initializable {
     private void closeBtnAction(ActionEvent event) {
         Stage current = (Stage) closeBtn.getScene().getWindow();
         current.close();
+    }
+    
+    private void changeThemeColor() {
+        try {
+            String sql = "SELECT color_code FROM color where id=1";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                colorCode = rs.getString("color_code");
+                rootPane.setStyle("-fx-background-color:" + colorCode);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

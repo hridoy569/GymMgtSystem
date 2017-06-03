@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="590.0" prefWidth="1366.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gymmgtsystem.ShiftFormController">
+<AnchorPane id="AnchorPane" prefHeight="590.0" prefWidth="1366.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gymmgtsystem.ReportsController">
    <children>
       <Label layoutX="158.0" layoutY="98.0" prefHeight="63.0" prefWidth="182.0" text="Reports">
          <font>

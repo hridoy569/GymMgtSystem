@@ -5,10 +5,6 @@
  */
 package gymmgtsystem;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXTextArea;
-import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,33 +13,27 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
+import javafx.scene.layout.VBox;
 import util.DB;
 
 /**
  * FXML Controller class
  *
- * @author B3
+ * @author Hridoy
  */
-public class InstructorInfoController implements Initializable {
+public class RevenueFormController implements Initializable {
 
     @FXML
-    private JFXTextField fname;
+    private AnchorPane formroot;
     @FXML
-    private JFXDatePicker dob;
+    private Button reloadTableBtn;
     @FXML
-    private JFXTextField weight1;
+    private Button deleteBtn;
     @FXML
-    private JFXTextArea address;
-    @FXML
-    private JFXTextArea address1;
-    @FXML
-    private JFXTextArea address2;
-    @FXML
-    private JFXButton closeBtn;
-    @FXML
-    private AnchorPane rootPane;
+    private VBox sidePane;
     Connection con = null;
     PreparedStatement ps;
     ResultSet rs;
@@ -60,24 +50,28 @@ public class InstructorInfoController implements Initializable {
     }    
 
     @FXML
-    private void closeBtnAction(ActionEvent event) {
-        Stage current = (Stage) closeBtn.getScene().getWindow();
-        current.close();
-        
+    private void reloadTableBtnAction(MouseEvent event) {
     }
-    
-    private void changeThemeColor() {
+
+    @FXML
+    private void deleteBtnAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void closeBtnAction(MouseEvent event) {
+        formroot.toBack();
+    }
+    private void changeThemeColor(){
         try {
             String sql = "SELECT color_code FROM color where id=1";
             ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
+            rs=ps.executeQuery();
+            while(rs.next()){
                 colorCode = rs.getString("color_code");
-                rootPane.setStyle("-fx-background-color:" + colorCode);
+                sidePane.setStyle("-fx-background-color:"+colorCode);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
 }

@@ -7,7 +7,9 @@ package gymmgtsystem;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -15,6 +17,9 @@ import javafx.fxml.Initializable;
  * @author B3
  */
 public class MembershipTableController implements Initializable {
+
+    @FXML
+    private AnchorPane formAnchorPane;
 
     /**
      * Initializes the controller class.

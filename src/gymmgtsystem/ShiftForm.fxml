@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="500.0" maxWidth="1000.0" prefHeight="500.0" prefWidth="1000.0" style="-fx-background-color: #222;" stylesheets="@../style/winDec.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gymmgtsystem.ShiftFormController">
+<AnchorPane fx:id="rootPane" maxHeight="500.0" maxWidth="1000.0" prefHeight="500.0" prefWidth="1000.0" style="-fx-background-color: #222;" stylesheets="@../style/winDec.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gymmgtsystem.ShiftFormController">
    <children>
       <AnchorPane layoutX="70.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>

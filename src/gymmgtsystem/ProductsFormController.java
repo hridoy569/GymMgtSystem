@@ -26,13 +26,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import util.DB;
 
@@ -43,7 +46,6 @@ import util.DB;
  */
 public class ProductsFormController implements Initializable {
 
-    Connection con = null;
 
     @FXML
     private StackPane memberStack;
@@ -69,31 +71,37 @@ public class ProductsFormController implements Initializable {
     private JFXTextField productType;
     @FXML
     private JFXButton addBtn;
-    @FXML
-    private Button allMembersBtn;
-    @FXML
-    private TabPane membersTabPane;
-    @FXML
-    private Tab addMemberTab;
-    @FXML
-    private JFXButton instructorBtn;
-    @FXML
-    private Tab membershipTab;
 
     @FXML
     private TableView productTable;
 
     @FXML
     private JFXTextField productSearch;
+    
+    @FXML
+    private TextField filterInput;
+    @FXML
+    private TabPane membersTabPane;
+    @FXML
+    private Tab addMemberTab;
+    @FXML
+    private Tab membershipTab;
     @FXML
     private JFXButton getProductBtn;
     @FXML
+    private Button refreshBtn;
+    @FXML
     private Button deleteProductBtn;
     @FXML
-    private Button refreshBtn;
-    
+    private VBox sidePane;
+    Connection con = null;
+    PreparedStatement ps;
+    ResultSet rs;
+    private String colorCode;
     @FXML
-    private JFXTextField filterInput;
+    private Label mshipLabel;
+    @FXML
+    private Label mshipLabel1;
 
     /**
      * Initializes the controller class.
@@ -101,6 +109,8 @@ public class ProductsFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         buildData();
+        con = DB.getConnection();
+        changeThemeColor();
     }
     LocalDate date;
     String add = "add";
@@ -231,20 +241,9 @@ String sqlDate = purchaseDate.getValue().format(DateTimeFormatter.ofPattern("yyy
 
     }
 
-    @FXML
-    private void allMembersBtn(MouseEvent event) {
-    }
     
   
 
-    @FXML
-    private void instructorBtnAction(ActionEvent event) {
-    }
-
-
-    @FXML
-    private void memberTabAction(MouseEvent event) {
-    }
     String getProductId;
 
     @FXML
@@ -281,9 +280,6 @@ String sqlDate = purchaseDate.getValue().format(DateTimeFormatter.ofPattern("yyy
         }
     }
 
-    @FXML
-    private void resetMemberFormBtnAction(MouseEvent event) {
-    }
 
     @FXML
     private void deleteProduct(ActionEvent event) {
@@ -351,6 +347,29 @@ String sqlDate = purchaseDate.getValue().format(DateTimeFormatter.ofPattern("yyy
     private void refreshBtnAction(ActionEvent event) {
         productTable.getItems().clear();
         buildData();
+    }
+
+
+    @FXML
+    private void memberTabAction(MouseEvent event) {
+    }
+
+    @FXML
+    private void resetMemberFormBtnAction(MouseEvent event) {
+    }
+    
+    private void changeThemeColor() {
+        try {
+            String sql = "SELECT color_code FROM color where id=1";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                colorCode = rs.getString("color_code");
+                sidePane.setStyle("-fx-background-color:" + colorCode);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
