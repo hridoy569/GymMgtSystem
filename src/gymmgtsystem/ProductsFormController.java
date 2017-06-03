@@ -26,10 +26,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -69,8 +71,6 @@ public class ProductsFormController implements Initializable {
     private JFXTextField productType;
     @FXML
     private JFXButton addBtn;
-    @FXML
-    private Button allMembersBtn;
 
     @FXML
     private TableView productTable;
@@ -79,13 +79,11 @@ public class ProductsFormController implements Initializable {
     private JFXTextField productSearch;
     
     @FXML
-    private JFXTextField filterInput;
+    private TextField filterInput;
     @FXML
     private TabPane membersTabPane;
     @FXML
     private Tab addMemberTab;
-    @FXML
-    private JFXButton instructorBtn;
     @FXML
     private Tab membershipTab;
     @FXML
@@ -100,6 +98,10 @@ public class ProductsFormController implements Initializable {
     PreparedStatement ps;
     ResultSet rs;
     private String colorCode;
+    @FXML
+    private Label mshipLabel;
+    @FXML
+    private Label mshipLabel1;
 
     /**
      * Initializes the controller class.
@@ -239,9 +241,6 @@ String sqlDate = purchaseDate.getValue().format(DateTimeFormatter.ofPattern("yyy
 
     }
 
-    @FXML
-    private void allMembersBtn(MouseEvent event) {
-    }
     
   
 
@@ -350,9 +349,6 @@ String sqlDate = purchaseDate.getValue().format(DateTimeFormatter.ofPattern("yyy
         buildData();
     }
 
-    @FXML
-    private void instructorBtnAction(ActionEvent event) {
-    }
 
     @FXML
     private void memberTabAction(MouseEvent event) {

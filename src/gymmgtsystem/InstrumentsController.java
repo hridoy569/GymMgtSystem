@@ -18,6 +18,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -55,14 +60,34 @@ public class InstrumentsController implements Initializable {
     private JFXTextField productType;
     @FXML
     private JFXButton addBtn;
-    @FXML
-    private Button allMembersBtn;
     Connection con = null;
     PreparedStatement ps;
     ResultSet rs;
     private String colorCode;
     @FXML
     private VBox sidePane;
+    @FXML
+    private TabPane membersTabPane;
+    @FXML
+    private Tab addMemberTab;
+    @FXML
+    private Label mshipLabel;
+    @FXML
+    private Tab membershipTab;
+    @FXML
+    private TableView<?> productTable;
+    @FXML
+    private Label mshipLabel1;
+    @FXML
+    private TextField filterInput;
+    @FXML
+    private JFXTextField productSearch;
+    @FXML
+    private JFXButton getProductBtn;
+    @FXML
+    private Button refreshBtn;
+    @FXML
+    private Button deleteProductBtn;
 
     /**
      * Initializes the controller class.
@@ -77,9 +102,6 @@ public class InstrumentsController implements Initializable {
     private void addProduct(ActionEvent event) {
     }
 
-    @FXML
-    private void allMembersBtn(MouseEvent event) {
-    }
     
     private void changeThemeColor(){
         try {
@@ -93,6 +115,30 @@ public class InstrumentsController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void searchProduct(ActionEvent event) {
+    }
+
+    @FXML
+    private void memberTabAction(MouseEvent event) {
+    }
+
+    @FXML
+    private void getProduct(ActionEvent event) {
+    }
+
+    @FXML
+    private void resetMemberFormBtnAction(MouseEvent event) {
+    }
+
+    @FXML
+    private void refreshBtnAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void deleteProduct(ActionEvent event) {
     }
     
 }

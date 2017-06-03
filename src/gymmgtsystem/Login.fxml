@@ -18,34 +18,34 @@
             <Image url="@../img/a.jpg" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="540.0" layoutY="58.0" prefHeight="387.0" prefWidth="301.0" style="-fx-background-color: #fff;">
+      <AnchorPane layoutX="540.0" layoutY="43.0" prefHeight="414.0" prefWidth="301.0" style="-fx-background-color: #fff;" styleClass="card-white" stylesheets="@../style/winDec.css">
          <children>
-            <ImageView fitHeight="98.0" fitWidth="98.0" layoutX="102.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="98.0" fitWidth="98.0" layoutX="102.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/cf0b4b825cd99b7e00ccf5cad3e7a014-weightlifting-circle-icon.png" />
                </image>
             </ImageView>
-            <Label fx:id="businessName" alignment="CENTER" contentDisplay="CENTER" layoutX="105.0" layoutY="112.0" text="IRON GYM" textAlignment="CENTER" textFill="#838383" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="112.0">
+            <Label fx:id="businessName" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="121.0" text="IRON GYM" textAlignment="CENTER" textFill="#838383" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="121.0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="uname" focusColor="#4076a8" labelFloat="true" layoutX="76.0" layoutY="155.0" maxWidth="188.0" minWidth="188.0" prefHeight="30.0" prefWidth="120.0" promptText="username" unFocusColor="#4076a8" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+            <JFXTextField fx:id="uname" focusColor="#4076a8" labelFloat="true" layoutX="50.0" layoutY="165.0" maxWidth="188.0" minWidth="188.0" prefHeight="30.0" prefWidth="120.0" promptText="username" unFocusColor="#4076a8" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
                <padding>
                   <Insets bottom="5.0" top="5.0" />
                </padding></JFXTextField>
-            <JFXPasswordField fx:id="upass" focusColor="#4076a8" labelFloat="true" layoutX="76.0" layoutY="203.0" maxWidth="188.0" minWidth="188.0" prefHeight="30.0" prefWidth="120.0" promptText="password" unFocusColor="#4076a8" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+            <JFXPasswordField fx:id="upass" focusColor="#4076a8" labelFloat="true" layoutX="50.0" layoutY="213.0" maxWidth="188.0" minWidth="188.0" prefHeight="30.0" prefWidth="120.0" promptText="password" unFocusColor="#4076a8" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
                <padding>
                   <Insets bottom="5.0" top="5.0" />
                </padding>
             </JFXPasswordField>
-            <JFXComboBox fx:id="urole" layoutX="50.0" layoutY="245.0" prefHeight="25.0" prefWidth="201.0" promptText="user type" />
-            <JFXButton fx:id="loginBtn" layoutX="82.0" layoutY="294.0" onAction="#loginAction" prefHeight="25.0" prefWidth="137.0" style="-fx-background-color: #0090B8;" text="Log In" textFill="WHITE">
+            <JFXComboBox fx:id="urole" layoutX="50.0" layoutY="255.0" prefHeight="25.0" prefWidth="201.0" promptText="user type" />
+            <JFXButton fx:id="loginBtn" buttonType="RAISED" layoutX="82.0" layoutY="311.0" onAction="#loginAction" prefHeight="25.0" prefWidth="137.0" style="-fx-background-color: #0090B8;" text="Log In" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </JFXButton>
-            <ImageView fx:id="gif" fitHeight="40.0" fitWidth="40.0" layoutX="131.0" layoutY="333.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="gif" fitHeight="40.0" fitWidth="40.0" layoutX="131.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../img/Preloader_9.gif" />
                </image>

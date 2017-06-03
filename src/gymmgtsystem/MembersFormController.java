@@ -190,6 +190,8 @@ public class MembersFormController implements Initializable {
     @FXML
     private VBox sidePane;
     private String colorCode;
+    @FXML
+    private Label mshipLabel;
 
     /**
      * Initializes the controller class.
@@ -406,6 +408,7 @@ public class MembersFormController implements Initializable {
         if (viewChange.equals("form")) {
             membershipViewChangeBtn.setText("Table View");
             viewChange = "table";
+            mshipLabel.setText("M e m b e r s h i p   T a b l e");
 
             if (e.getClickCount() >= 1) {
                 countMembershipViewChangeBtn += 1;
@@ -429,6 +432,7 @@ public class MembersFormController implements Initializable {
         } else {
             membershipViewChangeBtn.setText("Form View");
             viewChange = "form";
+            mshipLabel.setText("M e m b e r s h i p   D e t a i l s");
             formAnchorPane.toFront();
             System.out.println("tilePane.toFront");
         }
@@ -501,22 +505,19 @@ public class MembersFormController implements Initializable {
 
     @FXML
     private void deleteMemberFormBtnAction(ActionEvent event){
-        System.out.println("delete");
         JFXDialogLayout content = new JFXDialogLayout();
         content.setHeading(new Text("Confirmation to " + "delete"));
-        content.setBody(new Text("Do you want to " + "delete" + " the data? "
-                + "If your answer is yes press Okay button "
+        content.setBody(new Text("Do you want to delete Member ID " + id.getText()
+                + " ? If your answer is yes press Okay button "
                 + "else click outside of this box."));
         JFXDialog dialog = new JFXDialog(memberStack, content, JFXDialog.DialogTransition.CENTER);
         JFXButton button = new JFXButton("Okay");
-        button.setStyle("-fx-background-color: #094AAB; -fx-text-fill: #fff;");
+        button.setStyle("-fx-background-color:  #094AAB; -fx-text-fill: #fff;");
         final Glow glow = new Glow();
         glow.setLevel(0.69);
         button.setEffect(glow);
-        button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                try {
+        button.setOnAction((ev) -> {
+            try {
                     ps = con.prepareStatement("delete from member where member_id=?");
                     ps.setString(1, id.getText());
                     ps.executeUpdate();
@@ -525,11 +526,16 @@ public class MembersFormController implements Initializable {
                 } catch (SQLException ex) {
                     Logger.getLogger(MembersFormController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
-            }
-
-           });
-        content.setActions(button);
+        });
+        JFXButton blank = new JFXButton("");
+        blank.setStyle("-fx-background-color: transparent; -fx-text-fill: #fff;");
+        JFXButton button2 = new JFXButton("Cancel");
+        button2.setStyle("-fx-background-color: #094AAB; -fx-text-fill: #fff;");
+        button2.setEffect(glow);
+        button2.setOnAction((e) -> {
+            dialog.close();
+        });
+        content.setActions(button, blank, button2);
         dialog.show();
     }
 

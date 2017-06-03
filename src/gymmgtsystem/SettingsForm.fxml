@@ -26,7 +26,7 @@
                      <children>
                         <VBox layoutX="2.0" layoutY="190.0" spacing="20.0">
                            <children>
-                              <HBox fx:id="themeLabel" style="-fx-background-color: #fff;">
+                              <HBox fx:id="themeLabel" styleClass="card-white">
                                  <children>
                                     <Label alignment="CENTER" prefHeight="50.0" prefWidth="150.0" text="Light Color">
                                        <font>
@@ -39,9 +39,6 @@
                                        </font>
                                     </Label>
                                  </children>
-                                 <effect>
-                                    <DropShadow height="5.0" radius="2.0" width="5.0" />
-                                 </effect>
                               </HBox>
                               <HBox spacing="10.0">
                                  <children>
@@ -51,12 +48,12 @@
                                        </font>
                                     </Label>
                                     <JFXColorPicker fx:id="colorPicker" onAction="#colorPickerAction" />
-                                    <JFXButton fx:id="okBtn" onAction="#okBtnAction" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #01A5E1;" text="Change" textFill="WHITE">
+                                    <JFXButton fx:id="okBtn" buttonType="RAISED" onAction="#okBtnAction" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #01A5E1;" text="Change" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </JFXButton>
-                                    <JFXButton onAction="#defaultColorAction" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #01A5E1;" text="Default" textFill="WHITE">
+                                    <JFXButton buttonType="RAISED" onAction="#defaultColorAction" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #01A5E1;" text="Default" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
@@ -65,7 +62,7 @@
                               </HBox>
                            </children>
                         </VBox>
-                        <Label layoutX="168.0" layoutY="292.0" text="**Restart required!**" />
+                        <Label layoutX="162.0" layoutY="295.0" text="**Re-log in required!**" />
                         <VBox layoutX="4.0" prefHeight="60.0" prefWidth="295.0" spacing="20.0">
                            <children>
                               <HBox>
@@ -168,22 +165,22 @@
                         </Label>
                         <HBox layoutX="103.0" layoutY="383.0" spacing="5.0">
                            <children>
-                              <JFXButton fx:id="getProfileBtn" onAction="#getProfileBtnAction" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #01A5E1;" text="Get Profile" textFill="WHITE">
+                              <JFXButton fx:id="getProfileBtn" buttonType="RAISED" onAction="#getProfileBtnAction" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #01A5E1;" text="Get Profile" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton onAction="#resetBtnAction" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #01A5E1;" text="Reset Form" textFill="WHITE">
+                              <JFXButton buttonType="RAISED" onAction="#resetBtnAction" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #01A5E1;" text="Reset Form" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton onAction="#browseBtnAction" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #01A5E1;" text="Browse" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                              <JFXButton buttonType="RAISED" onAction="#browseBtnAction" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #01A5E1;" text="Browse" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="updateBtn" onAction="#updateBtnAction" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #01A5E1;" text="Update" textFill="WHITE">
+                              <JFXButton fx:id="updateBtn" buttonType="RAISED" onAction="#updateBtnAction" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #01A5E1;" text="Update" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -196,11 +193,11 @@
                   </Pane>
                </children>
             </Card>
-            <Card alignment="CENTER_LEFT" layoutX="75.0" layoutY="43.0" prefHeight="69.0" prefWidth="1148.0" style="-fx-background-color: #fff;" AnchorPane.leftAnchor="73.0" AnchorPane.rightAnchor="74.0">
+            <Card alignment="CENTER_LEFT" layoutX="75.0" layoutY="43.0" prefHeight="69.0" prefWidth="1148.0" style="-fx-background-color: #01A5E1;" AnchorPane.leftAnchor="73.0" AnchorPane.rightAnchor="74.0">
                <children>
-                  <Label text="Software Settings">
+                  <Label text="S o f t w a r e   S e t t i n g s" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font size="20.0" />
                      </font>
                   </Label>
                </children>
