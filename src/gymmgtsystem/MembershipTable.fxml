@@ -6,7 +6,7 @@
 
 <AnchorPane fx:id="formAnchorPane" prefHeight="330.0" prefWidth="816.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gymmgtsystem.MembershipTableController">
    <children>
-      <TableView layoutX="21.0" layoutY="39.0" prefHeight="264.0" prefWidth="745.0">
+      <TableView layoutX="21.0" layoutY="39.0" prefHeight="264.0" prefWidth="745.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="20.0">
         <columns>
           <TableColumn prefWidth="75.0" text="C1" />
           <TableColumn prefWidth="75.0" text="C2" />

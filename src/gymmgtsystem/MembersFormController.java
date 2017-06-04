@@ -339,7 +339,7 @@ public class MembersFormController implements Initializable {
 
                     ps.executeUpdate();
 
-                    resetMemberDetails();
+                    resetMembershipDetails();
 //                    System.out.println("Membership saved");
                 } catch (Exception e) {
                     System.out.println("membership error");
@@ -394,7 +394,53 @@ public class MembersFormController implements Initializable {
                 }
 
             } else if (tabIndex == 1) {
-                System.out.println("Membership updated");
+
+                try {
+                    String shiftName = shift.getSelectionModel().getSelectedItem().toString();
+                    String sql1 = "SELECT shift_id FROM shift where shift_name=?";
+                    ps = con.prepareStatement(sql1);
+                    ps.setString(1, shiftName);
+                    rs = ps.executeQuery();
+                    String shiftId = null;
+                    while (rs.next()) {
+                        shiftId = rs.getString(1);
+                        System.out.println(shiftId);
+                    }
+
+                    String packageName = packageCombo.getSelectionModel().getSelectedItem().toString();
+                    String sql2 = "SELECT package_id FROM package where package_name=?";
+                    ps = con.prepareStatement(sql2);
+                    ps.setString(1, packageName);
+                    rs = ps.executeQuery();
+                    String packageId = null;
+                    while (rs.next()) {
+                        packageId = rs.getString(1);
+                        System.out.println(packageId);
+                    }
+
+                    String startDateValue = startDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                    String endDateValue = endDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+                    String sql = "UPDATE membership SET member_id=?, shift_id=?, instructor_name=?, package_id=?, start_date=?, end_date=? WHERE member_id=?";
+                    ps = con.prepareStatement(sql);
+                    ps.setString(1, idMembership.getText());
+                    ps.setString(2, shiftId);
+                    ps.setString(3, instructorCombo.getSelectionModel().getSelectedItem().toString());
+                    ps.setString(4, packageId);
+                    ps.setString(5, startDateValue);
+                    ps.setString(6, endDateValue);
+                    ps.setString(7, id.getText());
+                    ps.executeUpdate();
+
+                    resetMembershipDetails();
+
+                    System.out.println("Membership updated");
+
+                } catch (Exception e) {
+                    System.out.println("update error");
+                    e.printStackTrace();
+                }
+
             } else {
                 System.out.println("Bill updated");
             }
@@ -504,10 +550,44 @@ public class MembersFormController implements Initializable {
     }
 
     @FXML
-    private void deleteMemberFormBtnAction(ActionEvent event){
-        JFXDialogLayout content = new JFXDialogLayout();
+    private void deleteMemberFormBtnAction(ActionEvent event) {
+        if (tabIndex == 0) {
+            JFXDialogLayout content = new JFXDialogLayout();
+            content.setHeading(new Text("Confirmation to " + "delete"));
+            content.setBody(new Text("Do you want to delete Member ID " + id.getText()
+                    + " ? If your answer is yes press Okay button "
+                    + "else click outside of this box."));
+            JFXDialog dialog = new JFXDialog(memberStack, content, JFXDialog.DialogTransition.CENTER);
+            JFXButton button = new JFXButton("Okay");
+            button.setStyle("-fx-background-color:  #094AAB; -fx-text-fill: #fff;");
+            final Glow glow = new Glow();
+            glow.setLevel(0.69);
+            button.setEffect(glow);
+            button.setOnAction((ev) -> {
+                try {
+                    ps = con.prepareStatement("delete from member where member_id=?");
+                    ps.setString(1, id.getText());
+                    ps.executeUpdate();
+                    dialog.close();
+                    resetMemberDetails();
+                } catch (SQLException ex) {
+                    Logger.getLogger(MembersFormController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+            JFXButton blank = new JFXButton("");
+            blank.setStyle("-fx-background-color: transparent; -fx-text-fill: #fff;");
+            JFXButton button2 = new JFXButton("Cancel");
+            button2.setStyle("-fx-background-color: #094AAB; -fx-text-fill: #fff;");
+            button2.setEffect(glow);
+            button2.setOnAction((e) -> {
+                dialog.close();
+            });
+            content.setActions(button, blank, button2);
+            dialog.show();
+        } else if(tabIndex==1){
+            JFXDialogLayout content = new JFXDialogLayout();
         content.setHeading(new Text("Confirmation to " + "delete"));
-        content.setBody(new Text("Do you want to delete Member ID " + id.getText()
+        content.setBody(new Text("Do you want to delete Membership of Member ID " + id.getText()
                 + " ? If your answer is yes press Okay button "
                 + "else click outside of this box."));
         JFXDialog dialog = new JFXDialog(memberStack, content, JFXDialog.DialogTransition.CENTER);
@@ -518,14 +598,14 @@ public class MembersFormController implements Initializable {
         button.setEffect(glow);
         button.setOnAction((ev) -> {
             try {
-                    ps = con.prepareStatement("delete from member where member_id=?");
-                    ps.setString(1, id.getText());
-                    ps.executeUpdate();
-                    dialog.close();
+                ps = con.prepareStatement("delete from membership where member_id=?");
+                ps.setString(1, id.getText());
+                ps.executeUpdate();
+                dialog.close();
                 resetMemberDetails();
-                } catch (SQLException ex) {
-                    Logger.getLogger(MembersFormController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            } catch (SQLException ex) {
+                Logger.getLogger(MembersFormController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
         JFXButton blank = new JFXButton("");
         blank.setStyle("-fx-background-color: transparent; -fx-text-fill: #fff;");
@@ -537,12 +617,11 @@ public class MembersFormController implements Initializable {
         });
         content.setActions(button, blank, button2);
         dialog.show();
+        }
     }
 
-
-
-@FXML
-        private void getBtnAction(ActionEvent event) throws SQLException {
+    @FXML
+    private void getBtnAction(ActionEvent event) throws SQLException {
         ps = con.prepareStatement("Select * from member where member_id=?");
         ps.setString(1, id.getText());
         rs = ps.executeQuery();
@@ -585,6 +664,45 @@ public class MembersFormController implements Initializable {
             saveBtnCondition = "update";
             buttonChange();
 
+            //membership form
+            try {
+                ps = con.prepareStatement("Select * from membership where member_id=?");
+            ps.setString(1, id.getText());
+            rs = ps.executeQuery();
+            rs.next();
+//            System.out.println(rs.getString(4));
+
+            String sql1 = "SELECT shift_name FROM shift where shift_id=?";
+            ps = con.prepareStatement(sql1);
+            ps.setString(1, rs.getString("shift_id"));
+            ResultSet rsShift = ps.executeQuery();
+            String shiftName = null;
+            while (rsShift.next()) {
+                shiftName = rsShift.getString(1);
+//                System.out.println(shiftName);
+            }
+//
+            String sql2 = "SELECT package_name FROM package where package_id=?";
+            ps = con.prepareStatement(sql2);
+            ps.setString(1, rs.getString("package_id"));
+            ResultSet rsPack = ps.executeQuery();
+            String packageName = null;
+            while (rsPack.next()) {
+                packageName = rsPack.getString(1);
+//                System.out.println(packageName);
+            }
+
+            idMembership.setText(rs.getString("member_id"));
+            instructorCombo.setValue(rs.getString("instructor_name"));
+            packageCombo.setValue(packageName);
+            shift.setValue(shiftName);
+            java.sql.Date d2 = rs.getDate("start_date");
+            startDate.setValue(d2.toLocalDate());
+            java.sql.Date d3 = rs.getDate("end_date");
+            endDate.setValue(d3.toLocalDate());
+            } catch (Exception e) {
+                System.out.println("membership not found");
+            }
         }
     }
 
@@ -638,12 +756,12 @@ public class MembersFormController implements Initializable {
     }
 
     @FXML
-        private void instructorBtnAction(ActionEvent event) throws IOException {
+    private void instructorBtnAction(ActionEvent event) throws IOException {
         nextStage(GymMgtSystem.InsInfo, "", true);
     }
 
     @FXML
-        private void memberTypeComboAction(ActionEvent event) {
+    private void memberTypeComboAction(ActionEvent event) {
         String value = memberTypeCombo.getSelectionModel().getSelectedItem().toString();
         if (value.equals("Instructor")) {
             instructorBtn.setVisible(true);
@@ -668,15 +786,15 @@ public class MembersFormController implements Initializable {
     }
 
     @FXML
-        private void saveBillBtnAction(ActionEvent event) {
+    private void saveBillBtnAction(ActionEvent event) {
     }
 
     @FXML
-        private void resetBillBtn(ActionEvent event) {
+    private void resetBillBtn(ActionEvent event) {
     }
 
     @FXML
-        private void deleteBillBtnAction(ActionEvent event) throws SQLException {
+    private void deleteBillBtnAction(ActionEvent event) throws SQLException {
 
     }
 
@@ -724,16 +842,16 @@ public class MembersFormController implements Initializable {
     }
 
     @FXML
-        private void addShiftBtnAction(ActionEvent event) throws IOException {
+    private void addShiftBtnAction(ActionEvent event) throws IOException {
         nextStage(GymMgtSystem.ShiftForm, "", true);
     }
 
     @FXML
-        private void addPackageBtnAction(ActionEvent event) throws IOException {
+    private void addPackageBtnAction(ActionEvent event) throws IOException {
         nextStage(GymMgtSystem.PackagesForm, "", true);
     }
-        
-        private void changeThemeColor() {
+
+    private void changeThemeColor() {
         try {
             String sql = "SELECT color_code FROM color where id=1";
             ps = con.prepareStatement(sql);
