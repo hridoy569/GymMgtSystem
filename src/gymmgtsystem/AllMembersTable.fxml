@@ -7,46 +7,41 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="formroot" maxWidth="1296.0" prefHeight="590.0" prefWidth="1296.0" style="-fx-background-color: #fff;" stylesheets="@../style/winDec.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gymmgtsystem.AllMembersTableController">
    <children>
-      <StackPane fx:id="viewStackPane" layoutX="50.0" layoutY="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="70.0" layoutY="50.0" maxHeight="490.0" maxWidth="1156.0" prefHeight="490.0" prefWidth="1156.0" style="-fx-background-color: #fff;" styleClass="card-white" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
          <children>
-            <AnchorPane maxHeight="490.0" maxWidth="1156.0" prefHeight="490.0" prefWidth="1156.0" style="-fx-background-color: #fff;" styleClass="card-white">
+            <TableView fx:id="memberTable" focusTraversable="false" layoutX="45.0" layoutY="68.0" onMouseClicked="#selectTableRowListener" prefHeight="400.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="80.0" />
+            <ImageView fx:id="img" fitHeight="239.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" />
+            <Button fx:id="reloadTableBtn" mnemonicParsing="false" onMouseClicked="#reloadTableBtnAction" prefHeight="22.0" prefWidth="22.0" styleClass="decoration-button-refresh" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="100.0">
+               <font>
+                  <Font size="1.0" />
+               </font>
+            </Button>
+            <Button fx:id="deleteBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteBtnAction" prefHeight="22.0" prefWidth="22.0" styleClass="decoration-button-delete" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="150.0">
+               <font>
+                  <Font size="1.0" />
+               </font>
+            </Button>
+            <Pane prefHeight="61.0" prefWidth="916.0" style="-fx-background-color: #01A5E1; -fx-background-radius: 5 5 0 0;" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <TableView fx:id="memberTable" focusTraversable="false" layoutX="45.0" layoutY="68.0" onMouseClicked="#selectTableRowListener" prefHeight="400.0" prefWidth="200.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="70.0" />
-                  <ImageView fx:id="img" fitHeight="239.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" />
-                  <Button fx:id="reloadTableBtn" mnemonicParsing="false" onMouseClicked="#reloadTableBtnAction" prefHeight="22.0" prefWidth="22.0" styleClass="decoration-button-refresh" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="100.0">
+                  <TextField fx:id="filterInput" layoutX="181.0" layoutY="18.0" prefHeight="25.0" prefWidth="751.0" />
+                  <Label layoutX="47.0" layoutY="18.0" prefHeight="25.0" text="Search Members" textFill="WHITE">
                      <font>
-                        <Font size="1.0" />
+                        <Font name="Lucida Bright Demibold" size="14.0" />
                      </font>
-                  </Button>
-                  <Button fx:id="deleteBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteBtnAction" prefHeight="22.0" prefWidth="22.0" styleClass="decoration-button-delete" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="150.0">
+                  </Label>
+                  <Label fx:id="foundItemLabel" alignment="CENTER_RIGHT" layoutX="956.0" layoutY="18.0" prefHeight="25.0" prefWidth="136.0" textFill="WHITE">
                      <font>
-                        <Font size="1.0" />
+                        <Font name="Lucida Bright Demibold" size="14.0" />
                      </font>
-                  </Button>
-                  <Pane prefHeight="61.0" prefWidth="916.0" style="-fx-background-color: #01A5E1; -fx-background-radius: 5 5 0 0;" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <TextField fx:id="filterInput" layoutX="181.0" layoutY="18.0" prefHeight="25.0" prefWidth="751.0" />
-                        <Label layoutX="47.0" layoutY="18.0" prefHeight="25.0" text="Search Members" textFill="WHITE">
-                           <font>
-                              <Font name="Lucida Bright Demibold" size="14.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="foundItemLabel" alignment="CENTER_RIGHT" layoutX="956.0" layoutY="18.0" prefHeight="25.0" prefWidth="136.0" textFill="WHITE">
-                           <font>
-                              <Font name="Lucida Bright Demibold" size="14.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Pane>
+                  </Label>
                </children>
-            </AnchorPane>
+            </Pane>
          </children>
-      </StackPane>
+      </AnchorPane>
       <Button fx:id="closeBtn" layoutX="1230.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#closeBtnAction" prefHeight="22.0" prefWidth="22.0" styleClass="decoration-button-closeForm" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
          <font>
             <Font size="1.0" />

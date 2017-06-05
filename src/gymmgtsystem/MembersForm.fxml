@@ -132,17 +132,17 @@
                                                       <AnchorPane fx:id="formAnchorPane" prefHeight="330.0" prefWidth="816.0" style="-fx-background-color: #fff;">
                                                          <children>
                                                             <Label layoutX="18.25" layoutY="88.0" text="Member ID" />
-                                                            <JFXTextField fx:id="idMembership" focusColor="#01a5e1" layoutX="131.0" layoutY="82.0" maxWidth="173.0" minWidth="167.0" prefHeight="31.0" prefWidth="173.0" />
+                                                            <JFXTextField fx:id="idMembership" focusColor="#01a5e1" layoutX="139.0" layoutY="82.0" maxWidth="173.0" minWidth="154.0" prefHeight="31.0" prefWidth="154.0" />
                                                             <Label layoutX="19.25" layoutY="137.0" text="Shift" />
                                                             <Label layoutX="18.25" layoutY="191.0" text="Package" />
                                                             <Label layoutX="422.25" layoutY="85.0" text="Instructor" />
                                                             <Label layoutX="422.25" layoutY="136.0" text="Start Date" />
                                                             <Label layoutX="422.25" layoutY="190.0" text="End Date" />
                                                             <JFXComboBox fx:id="shift" layoutX="138.0" layoutY="134.0" prefHeight="25.0" prefWidth="154.0" promptText="-- Select Shift --" />
-                                                            <JFXComboBox fx:id="packageCombo" layoutX="138.0" layoutY="188.0" prefHeight="25.0" prefWidth="152.0" promptText="-- Select Package --" />
-                                                            <JFXDatePicker fx:id="startDate" layoutX="534.25" layoutY="132.0" prefHeight="28.0" prefWidth="150.0" promptText="5/3/2017" />
-                                                            <JFXDatePicker fx:id="endDate" layoutX="534.25" layoutY="186.0" prefHeight="28.0" prefWidth="150.0" promptText="5/3/2017" />
-                                                            <JFXComboBox fx:id="instructorCombo" layoutX="542.0" layoutY="81.0" prefHeight="25.0" prefWidth="154.0" promptText="-- Select Instructor --" />
+                                                            <JFXComboBox fx:id="packageCombo" layoutX="138.0" layoutY="188.0" prefHeight="25.0" prefWidth="154.0" promptText="-- Select Package --" />
+                                                            <JFXDatePicker fx:id="startDate" layoutX="534.0" layoutY="132.0" prefHeight="28.0" prefWidth="170.0" promptText="5/3/2017" />
+                                                            <JFXDatePicker fx:id="endDate" layoutX="534.0" layoutY="186.0" prefHeight="28.0" prefWidth="170.0" promptText="5/3/2017" />
+                                                            <JFXComboBox fx:id="instructorCombo" layoutX="535.0" layoutY="81.0" prefHeight="25.0" prefWidth="154.0" promptText="-- Select Instructor --" />
                                                             <Button fx:id="addShiftBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="312.0" layoutY="141.0" mnemonicParsing="false" onAction="#addShiftBtnAction" prefHeight="16.0" prefWidth="16.0" styleClass="decoration-button-addPlus" textAlignment="CENTER">
                                                                <font>
                                                                   <Font size="1.0" />
