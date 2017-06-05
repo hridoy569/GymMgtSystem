@@ -179,50 +179,59 @@
                                        <children>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="card-white" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                              <children>
-                                                <Label layoutX="76.0" layoutY="144.0" text="Member ID" />
-                                                <JFXTextField fx:id="idBill" focusColor="#01a5e1" layoutX="206.0" layoutY="142.0" prefHeight="25.0" prefWidth="150.0" promptText="99" />
-                                                <Label layoutX="75.0" layoutY="248.0" text="Amount" />
-                                                <Label layoutX="75.0" layoutY="194.0" text="Type" />
-                                                <Label layoutX="480.0" layoutY="141.0" text="Payment Date" />
-                                                <JFXTextField focusColor="#01a5e1" layoutX="609.0" layoutY="191.0" prefHeight="25.0" prefWidth="150.0" promptText="1 month" />
-                                                <Label layoutX="480.0" layoutY="255.0" text="Description" />
-                                                <Label layoutX="480.0" layoutY="194.0" text="Quantity" />
-                                                <JFXComboBox layoutX="212.0" layoutY="190.0" prefHeight="25.0" prefWidth="135.0" promptText="Monthly Bill" />
-                                                <JFXDatePicker layoutX="609.0" layoutY="137.0" prefHeight="28.0" prefWidth="150.0" promptText="5/3/2017" />
-                                                <Label layoutX="75.0" layoutY="292.0" text="Due" />
-                                                <JFXTextField focusColor="#01a5e1" layoutX="205.0" layoutY="290.0" prefHeight="25.0" prefWidth="150.0" promptText="1000" />
-                                                <Label layoutX="479.0" layoutY="317.0" text="Advance" />
-                                                <JFXTextField focusColor="#01a5e1" layoutX="608.0" layoutY="313.0" prefHeight="25.0" prefWidth="150.0" promptText="1000" />
-                                                <JFXTextArea focusColor="#01a5e1" layoutX="616.0" layoutY="240.0" prefHeight="50.0" prefWidth="137.0" promptText="Give some description.." stylesheets="@../style/form.css" wrapText="true" />
-                                                <JFXTextField focusColor="#01a5e1" layoutX="206.0" layoutY="242.0" prefHeight="25.0" prefWidth="150.0" promptText="1000" />
-                                                <JFXButton fx:id="saveBillBtn" buttonType="RAISED" layoutX="636.0" layoutY="366.0" onAction="#saveBillBtnAction" onMouseClicked="#saveToDatabaseBtnAction" prefHeight="30.0" prefWidth="116.0" style="-fx-background-color: #01A5E1;" text="Create Bill" textFill="WHITE" AnchorPane.rightAnchor="164.0">
-                                                   <font>
-                                                      <Font name="System Bold" size="12.0" />
-                                                   </font>
-                                                </JFXButton>
-                                                <JFXTextField fx:id="billID" focusColor="#01a5e1" layoutX="567.0" layoutY="83.0" maxWidth="121.0" minWidth="93.0" prefHeight="31.0" prefWidth="116.0" promptText="   Bill ID" style="-fx-background-color: #f8f8f8;" unFocusColor="WHITE" AnchorPane.rightAnchor="233.0" />
-                                                <JFXButton fx:id="billSearchBtn" buttonType="RAISED" layoutX="692.0" layoutY="84.0" onAction="#getBtnAction" prefHeight="29.0" prefWidth="61.0" style="-fx-background-color: #01A5E1;" text="Search" textFill="WHITE" AnchorPane.rightAnchor="163.0">
-                                                   <font>
-                                                      <Font name="System Bold" size="12.0" />
-                                                   </font>
-                                                </JFXButton>
-                                                <Button fx:id="resetBillBtn" mnemonicParsing="false" onAction="#resetBillBtn" onMouseClicked="#resetMemberFormBtnAction" prefHeight="22.0" prefWidth="22.0" styleClass="decoration-button-refresh" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="100.0">
-                                                   <font>
-                                                      <Font size="1.0" />
-                                                   </font>
-                                                </Button>
-                                                <Button fx:id="deleteBillBtn" mnemonicParsing="false" onAction="#deleteBillBtnAction" prefHeight="22.0" prefWidth="22.0" styleClass="decoration-button-delete" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="145.0">
-                                                   <font>
-                                                      <Font size="1.0" />
-                                                   </font>
-                                                </Button>
+                                                <StackPane fx:id="billStackPane" layoutX="75.0" layoutY="72.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="72.0">
+                                                   <children>
+                                                      <AnchorPane fx:id="billFormPane" style="-fx-background-color: #fff;">
+                                                         <children>
+                                                            <Label layoutX="1.0" layoutY="72.0" text="Member ID" />
+                                                            <JFXTextField fx:id="idBill" focusColor="#01a5e1" layoutX="131.0" layoutY="70.0" prefHeight="25.0" prefWidth="150.0" promptText="99" />
+                                                            <Label layoutY="176.0" text="Amount" />
+                                                            <Label layoutY="122.0" text="Type" />
+                                                            <Label layoutX="405.0" layoutY="69.0" text="Payment Date" />
+                                                            <JFXTextField focusColor="#01a5e1" layoutX="534.0" layoutY="119.0" prefHeight="25.0" prefWidth="150.0" promptText="1 month" />
+                                                            <Label layoutX="405.0" layoutY="183.0" text="Description" />
+                                                            <Label layoutX="405.0" layoutY="122.0" text="Quantity" />
+                                                            <JFXComboBox layoutX="137.0" layoutY="118.0" prefHeight="25.0" prefWidth="135.0" promptText="Monthly Bill" />
+                                                            <JFXDatePicker layoutX="534.0" layoutY="65.0" prefHeight="28.0" prefWidth="150.0" promptText="5/3/2017" />
+                                                            <Label layoutY="220.0" text="Due" />
+                                                            <JFXTextField focusColor="#01a5e1" layoutX="130.0" layoutY="218.0" prefHeight="25.0" prefWidth="150.0" promptText="1000" />
+                                                            <Label layoutX="404.0" layoutY="245.0" text="Advance" />
+                                                            <JFXTextField focusColor="#01a5e1" layoutX="533.0" layoutY="241.0" prefHeight="25.0" prefWidth="150.0" promptText="1000" />
+                                                            <JFXTextArea focusColor="#01a5e1" layoutX="541.0" layoutY="168.0" prefHeight="50.0" prefWidth="137.0" promptText="Give some description.." stylesheets="@../style/form.css" wrapText="true" />
+                                                            <JFXTextField focusColor="#01a5e1" layoutX="131.0" layoutY="170.0" prefHeight="25.0" prefWidth="150.0" promptText="1000" />
+                                                            <JFXButton fx:id="saveBillBtn" buttonType="RAISED" layoutX="561.0" layoutY="294.0" onAction="#saveBillBtnAction" onMouseClicked="#saveToDatabaseBtnAction" prefHeight="30.0" prefWidth="116.0" style="-fx-background-color: #01A5E1;" text="Create Bill" textFill="WHITE" AnchorPane.bottomAnchor="12.0">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </JFXButton>
+                                                            <JFXTextField fx:id="billID" focusColor="#01a5e1" layoutX="492.0" layoutY="11.0" maxWidth="121.0" minWidth="93.0" prefHeight="31.0" prefWidth="116.0" promptText="   Bill ID" style="-fx-background-color: #f8f8f8;" unFocusColor="WHITE" />
+                                                            <JFXButton fx:id="billSearchBtn" buttonType="RAISED" layoutX="617.0" layoutY="12.0" onAction="#getBtnAction" prefHeight="29.0" prefWidth="61.0" style="-fx-background-color: #01A5E1;" text="Search" textFill="WHITE">
+                                                               <font>
+                                                                  <Font name="System Bold" size="12.0" />
+                                                               </font>
+                                                            </JFXButton>
+                                                            <Button fx:id="resetBillBtn" layoutX="794.0" layoutY="28.0" mnemonicParsing="false" onAction="#resetBillBtn" onMouseClicked="#resetMemberFormBtnAction" prefHeight="22.0" prefWidth="22.0" styleClass="decoration-button-refresh" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+                                                               <font>
+                                                                  <Font size="1.0" />
+                                                               </font>
+                                                            </Button>
+                                                            <Button fx:id="deleteBillBtn" layoutX="794.0" layoutY="73.0" mnemonicParsing="false" onAction="#deleteBillBtnAction" prefHeight="22.0" prefWidth="22.0" styleClass="decoration-button-delete" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+                                                               <font>
+                                                                  <Font size="1.0" />
+                                                               </font>
+                                                            </Button>
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </children>
+                                                </StackPane>
                                                 <Pane prefHeight="61.0" prefWidth="916.0" style="-fx-background-color: #01A5E1; -fx-background-radius: 5 5 0 0;" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
                                                    <children>
-                                                      <Label fx:id="mshipLabel1" layoutX="75.0" layoutY="21.0" text="B i l l i n g    D e t a i l s" textFill="WHITE">
+                                                      <Label fx:id="billLabel" layoutX="75.0" layoutY="21.0" text="B i l l i n g    D e t a i l s" textFill="WHITE">
                                                          <font>
                                                             <Font size="18.0" />
                                                          </font>
                                                       </Label>
+                                                      <JFXToggleButton fx:id="billingViewChangeBtn" layoutX="743.0" layoutY="7.0" onMouseClicked="#billingViewChangeBtnAction" selected="true" text="Form View" textFill="WHITE" toggleColor="WHITE" toggleLineColor="#e5eff2" unToggleLineColor="#f5f5f5" />
                                                    </children>
                                                 </Pane>
                                              </children>

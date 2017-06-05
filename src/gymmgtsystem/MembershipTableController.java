@@ -7,8 +7,11 @@ package gymmgtsystem;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -20,6 +23,10 @@ public class MembershipTableController implements Initializable {
 
     @FXML
     private AnchorPane formAnchorPane;
+    @FXML
+    private Button resetBillBtn;
+    @FXML
+    private Button deleteBillBtn;
 
     /**
      * Initializes the controller class.
@@ -28,5 +35,17 @@ public class MembershipTableController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void resetMemberFormBtnAction(MouseEvent event) {
+    }
+
+    @FXML
+    private void resetBillBtn(ActionEvent event) {
+    }
+
+    @FXML
+    private void deleteBillBtnAction(ActionEvent event) {
+    }
     
 }
