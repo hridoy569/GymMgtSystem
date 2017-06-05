@@ -82,7 +82,7 @@ public class PackagesFormController implements Initializable {
     @FXML
     private void addPackage(ActionEvent event) {
         try {
-            con = DB.getConnection();
+           
             String sql = "INSERT INTO package(package_name, package_type, package_duration, package_fee) VALUES(?,?,?,?) ";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, packageName.getText());
@@ -110,12 +110,12 @@ public class PackagesFormController implements Initializable {
 
     private void showPackages() {
         try {
-            con = DB.getConnection();
+     
             String sql = "SELECT * FROM package ";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-
+                
             }
         } catch (Exception e) {
         }

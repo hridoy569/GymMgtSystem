@@ -25,7 +25,7 @@
                <children>
                   <AnchorPane fx:id="formroot" maxWidth="1296.0" prefHeight="590.0" prefWidth="1296.0" style="-fx-background-color: #fff;" stylesheets="@../style/tabPane.css">
                      <children>
-                        <TabPane fx:id="membersTabPane" layoutX="366.0" layoutY="61.0" onMouseClicked="#memberTabAction" prefHeight="469.0" prefWidth="926.0" AnchorPane.rightAnchor="74.0" AnchorPane.topAnchor="80.0">
+                        <TabPane fx:id="membersTabPane" layoutX="366.0" layoutY="61.0" onMouseClicked="#memberTabAction" prefHeight="469.0" prefWidth="926.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="74.0" AnchorPane.topAnchor="80.0">
                            <tabs>
                               <Tab fx:id="addMemberTab" closable="false" text="   Add Product   ">
                                  <content>
@@ -33,7 +33,7 @@
                                        <children>
                                           <AnchorPane layoutX="45.0" layoutY="23.0" styleClass="card-white" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                              <children>
-                                                <Pane layoutX="50.0" layoutY="84.0" prefHeight="314.0" prefWidth="362.0">
+                                                <Pane layoutX="178.0" layoutY="88.0" prefHeight="314.0" prefWidth="362.0">
                                                    <children>
                                                       <Label layoutX="25.0" layoutY="30.0" text="Product Name" />
                                                       <JFXTextField fx:id="productName" focusColor="#01a5e1" layoutX="154.0" layoutY="28.0" prefHeight="25.0" prefWidth="150.0" promptText="Jhon " />
@@ -47,7 +47,7 @@
                                                       <JFXTextArea fx:id="productDescription" focusColor="#01a5e1" layoutX="160.0" layoutY="125.0" maxWidth="142.0" minWidth="118.0" prefHeight="50.0" prefWidth="137.0" promptText="21 Down Town, LA, USA" wrapText="true" />
                                                    </children>
                                                 </Pane>
-                                                <Pane layoutX="412.0" layoutY="92.0" prefHeight="278.0" prefWidth="362.0">
+                                                <Pane layoutX="540.0" layoutY="96.0" prefHeight="278.0" prefWidth="362.0">
                                                    <children>
                                                       <Label layoutX="39.0" layoutY="72.0" text="Purchase Date" />
                                                       <Label layoutX="39.0" layoutY="120.0" text="Purchase Price" />
@@ -57,7 +57,7 @@
                                                       <JFXDatePicker fx:id="purchaseDate" layoutX="168.0" layoutY="67.0" prefHeight="28.0" prefWidth="150.0" promptText="5/3/2017" />
                                                       <Label layoutX="39.0" layoutY="27.0" text="Product type" />
                                                       <JFXTextField fx:id="productType" focusColor="#01a5e1" layoutX="168.0" layoutY="20.0" prefHeight="25.0" prefWidth="150.0" promptText="+8801234567890" />
-                                                      <JFXButton fx:id="addBtn" buttonType="RAISED" layoutX="139.0" layoutY="227.0" onAction="#addProduct" prefHeight="29.0" prefWidth="179.0" style="-fx-background-color: #01A5E1;" text="Add Product" textFill="WHITE">
+                                                      <JFXButton fx:id="addBtn" buttonType="RAISED" layoutX="139.0" layoutY="250.0" onAction="#addProduct" prefHeight="29.0" prefWidth="179.0" style="-fx-background-color: #01A5E1;" text="Add Product" textFill="WHITE">
                                                          <font>
                                                             <Font name="System Bold" size="13.0" />
                                                          </font>
@@ -71,6 +71,12 @@
                                                             <Font size="18.0" />
                                                          </font>
                                                       </Label>
+                                                      <JFXTextField fx:id="productSearch" focusColor="#01a5e1" layoutX="721.0" layoutY="19.0" maxWidth="177.0" minWidth="93.0" prefHeight="31.0" prefWidth="177.0" promptText="   Search by ID" style="-fx-background-color: #F4F4F4;" unFocusColor="#f4f4f4" />
+                                                      <JFXButton fx:id="getProductBtn" buttonType="RAISED" layoutX="913.0" layoutY="20.0" onAction="#getProduct" prefHeight="29.0" prefWidth="61.0" style="-fx-background-color: #01A5E1;" text="Get" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="System Bold" size="12.0" />
+                                                         </font>
+                                                      </JFXButton>
                                                    </children>
                                                 </Pane>
                                              </children>
@@ -85,7 +91,7 @@
                                        <children>
                                           <AnchorPane layoutX="39.0" layoutY="22.0" styleClass="card-white" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                              <children>
-                                                <TableView fx:id="productTable" layoutX="72.0" layoutY="75.0" prefHeight="336.0" prefWidth="787.0" />
+                                                <TableView fx:id="productTable" layoutX="72.0" layoutY="75.0" prefHeight="336.0" prefWidth="787.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="100.0" />
                                                 <Pane prefHeight="61.0" prefWidth="916.0" style="-fx-background-color: #01A5E1; -fx-background-radius: 5 5 0 0;" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
                                                    <children>
                                                       <Label fx:id="mshipLabel1" layoutX="75.0" layoutY="21.0" text="P r o d u c t   T a b l e" textFill="WHITE">
@@ -93,12 +99,12 @@
                                                             <Font size="18.0" />
                                                          </font>
                                                       </Label>
-                                                      <JFXButton buttonType="RAISED" layoutX="771.0" layoutY="22.0" onAction="#searchProduct" prefHeight="25.0" prefWidth="87.0" style="-fx-background-color: #01A5E1;" text="Search" textFill="WHITE">
+                                                      <TextField fx:id="filterInput" layoutX="273.0" layoutY="22.0" prefHeight="25.0" prefWidth="641.0" />
+                                                      <Label fx:id="foundItemLabel" alignment="CENTER_RIGHT" layoutX="927.0" layoutY="22.0" prefHeight="25.0" prefWidth="136.0" textFill="WHITE">
                                                          <font>
-                                                            <Font name="System Bold" size="12.0" />
+                                                            <Font name="Lucida Bright Demibold" size="14.0" />
                                                          </font>
-                                                      </JFXButton>
-                                                      <TextField fx:id="filterInput" layoutX="319.0" layoutY="22.0" prefHeight="25.0" prefWidth="438.0" />
+                                                      </Label>
                                                    </children>
                                                 </Pane>
                                              </children>
@@ -109,12 +115,6 @@
                               </Tab>
                            </tabs>
                         </TabPane>
-                        <JFXTextField fx:id="productSearch" focusColor="#01a5e1" layoutX="135.0" layoutY="78.0" maxWidth="121.0" minWidth="93.0" prefHeight="31.0" prefWidth="116.0" promptText="   Search by ID" style="-fx-background-color: #F4F4F4;" unFocusColor="#f4f4f4" AnchorPane.rightAnchor="1110.0" />
-                        <JFXButton fx:id="getProductBtn" buttonType="RAISED" layoutX="259.0" layoutY="79.0" onAction="#getProduct" prefHeight="29.0" prefWidth="61.0" style="-fx-background-color: #01A5E1;" text="Get" textFill="WHITE" AnchorPane.rightAnchor="1046.0">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </JFXButton>
                         <Button fx:id="refreshBtn" mnemonicParsing="false" onAction="#refreshBtnAction" onMouseClicked="#resetMemberFormBtnAction" prefHeight="22.0" prefWidth="22.0" styleClass="decoration-button-refresh" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="150.0">
                            <font>
                               <Font size="1.0" />

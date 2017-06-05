@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -48,8 +49,6 @@ public class ProductsFormController implements Initializable {
 
 
     @FXML
-    private StackPane memberStack;
-    @FXML
     private AnchorPane formroot;
     @FXML
     private JFXTextField productName;
@@ -73,7 +72,7 @@ public class ProductsFormController implements Initializable {
     private JFXButton addBtn;
 
     @FXML
-    private TableView productTable;
+    private TableView<ObservableList> productTable;
 
     @FXML
     private JFXTextField productSearch;
@@ -81,11 +80,7 @@ public class ProductsFormController implements Initializable {
     @FXML
     private TextField filterInput;
     @FXML
-    private TabPane membersTabPane;
-    @FXML
     private Tab addMemberTab;
-    @FXML
-    private Tab membershipTab;
     @FXML
     private JFXButton getProductBtn;
     @FXML
@@ -102,19 +97,95 @@ public class ProductsFormController implements Initializable {
     private Label mshipLabel;
     @FXML
     private Label mshipLabel1;
+    @FXML
+    private Label foundItemLabel;
+    @FXML
+    private StackPane memberStack;
+    @FXML
+    private TabPane membersTabPane;
+    @FXML
+    private Tab membershipTab;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        buildData();
+      
         con = DB.getConnection();
+          buildData();
         changeThemeColor();
+        
+        filterInput.textProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                filterProductList((String) oldValue, (String) newValue);
+            }
+
+        });
     }
     LocalDate date;
     String add = "add";
 //    String update = "Update Product";
+    
+        public void filterProductList(String oldValue, String newValue) {
+        ObservableList<ObservableList> filteredListIncrease = FXCollections.observableArrayList();
+        ObservableList<ObservableList> filteredListDecrese = FXCollections.observableArrayList();
+        if (filterInput.equals("") || newValue.equals("")) {
+            productTable.setItems(data);
+            //counts records
+            int totalRecord = data.size();
+            if (totalRecord <= 1) {
+                foundItemLabel.setText("Found " + totalRecord + " product");
+            } else {
+                foundItemLabel.setText("Found " + totalRecord + " products");
+            }
+
+        } else if (newValue.length() < oldValue.length()) {
+            newValue = newValue.toUpperCase();
+            for (ObservableList product : data) {
+                String filterId = product.get(0).toString();
+                String filterName = product.get(1).toString();
+                String filterCode = product.get(8).toString();
+                String filterType = product.get(2).toString();
+            
+                if (filterId.toUpperCase().contains(newValue) || filterName.toUpperCase().contains(newValue) || filterCode.toUpperCase().contains(newValue) || filterType.toUpperCase().contains(newValue) ) {
+                    filteredListDecrese.add(product);
+                }
+            }
+            productTable.setItems(filteredListDecrese);
+            //counts records
+            int totalRecord = filteredListDecrese.size();
+            if (totalRecord <= 1) {
+                foundItemLabel.setText("Found " + totalRecord + " product");
+            } else {
+                foundItemLabel.setText("Found " + totalRecord + " products");
+            }
+
+        } else {
+            newValue = newValue.toUpperCase();
+            for (ObservableList product : data) {
+                String filterId = product.get(0).toString();
+                String filterName = product.get(1).toString();
+                String filterCode = product.get(8).toString();
+                String filterType = product.get(2).toString();
+                if (filterId.toUpperCase().contains(newValue) || filterName.toUpperCase().contains(newValue) || filterCode.toUpperCase().contains(newValue) || filterType.toUpperCase().contains(newValue) ) {
+                    filteredListIncrease.add(product);
+
+                }
+            }
+            productTable.setItems(filteredListIncrease);
+            //counts records
+            int totalRecord = filteredListIncrease.size();
+            if (totalRecord <= 1) {
+                foundItemLabel.setText("Found " + totalRecord + " product");
+            } else {
+                foundItemLabel.setText("Found " + totalRecord + " products");
+            }
+        }
+    }
+    
+    
  
     @FXML
     private void addProduct(ActionEvent event) {
@@ -176,57 +247,7 @@ String sqlDate = purchaseDate.getValue().format(DateTimeFormatter.ofPattern("yyy
         }
     }
     
-    
-    @FXML
-    private void searchProduct(ActionEvent event) {
-                data = FXCollections.observableArrayList();
-        try {
-            String getSearchField = filterInput.getText();
-            //SQL FOR SELECTING ALL OF CUSTOMER
-            String SQL = "SELECT * from product where product_code = '"+getSearchField+"' ";   						//change table name
-            //ResultSet
-            con = DB.getConnection();
-            ResultSet rs = con.createStatement().executeQuery(SQL);
 
-            //* TABLE COLUMN ADDED DYNAMICALLY *
-            for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
-                //We are using non property style for making dynamic table
-                final int j = i;
-                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
-                col.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
-                    public ObservableValue<String> call(TableColumn.CellDataFeatures<ObservableList, String> param) {
-                        return new SimpleStringProperty(param.getValue().get(j).toString());
-                    }
-                });
-
-                productTable.getColumns().addAll(col);			//change table name
-                System.out.println("Column [" + i + "] ");
-            }
-            //* Data added to ObservableList *
-            while (rs.next()) {
-                //Iterate Row
-                ObservableList<String> row = FXCollections.observableArrayList();
-                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
-                    //Iterate Column
-                    row.add(rs.getString(i));
-                }
-                System.out.println("Row [1] added " + row);
-                data.add(row);
-
-            }
-
-            //FINALLY ADDED TO TableView
-            productTable.setItems(data);			//change table name
-            
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Error on Building Data");
-        }
-        
-    }
-    
-    
 
     private void clearForm() {
         productName.setText("");
@@ -345,14 +366,11 @@ String sqlDate = purchaseDate.getValue().format(DateTimeFormatter.ofPattern("yyy
 
     @FXML
     private void refreshBtnAction(ActionEvent event) {
-        productTable.getItems().clear();
-        buildData();
+        reloadData();
+        
     }
 
 
-    @FXML
-    private void memberTabAction(MouseEvent event) {
-    }
 
     @FXML
     private void resetMemberFormBtnAction(MouseEvent event) {
@@ -372,4 +390,17 @@ String sqlDate = purchaseDate.getValue().format(DateTimeFormatter.ofPattern("yyy
         }
     }
 
+    
+    public void reloadData() {
+        for (int i = 0; i < productTable.getColumns().size(); i++) {
+            productTable.getColumns().get(i).setVisible(false);
+        }
+
+        filterInput.clear();
+        buildData();
+    }
+
+    @FXML
+    private void memberTabAction(MouseEvent event) {
+    }
 }

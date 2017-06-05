@@ -72,8 +72,8 @@ public class ShiftFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        loadPackages();
         con = DB.getConnection();
+        loadPackages();
         changeThemeColor();
     }
 
@@ -99,12 +99,21 @@ public class ShiftFormController implements Initializable {
     @FXML
     private void addshift(ActionEvent event) {
         try {
+            String packName = packageName.getSelectionModel().getSelectedItem().toString();
+            String sql1 = "SELECT package_id FROM package where package_name=?";
+            ps = con.prepareStatement(sql1);
+            ps.setString(1, packName);
+            rs = ps.executeQuery();
+            String packId = null;
+            while (rs.next()) {
+                packId = rs.getString(1);
+            }
+
             String sql = "INSERT INTO shift(shift_name, start_time, package_id) VALUES(?,?,?) ";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, shiftName.getText());
             ps.setString(2, shiftTime.getText());
-            ps.setString(3, String.valueOf(packageName.getSelectionModel().getSelectedIndex()));
-
+            ps.setString(3, packId);
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected > 0) {
 
