@@ -94,10 +94,13 @@ public class MembersFormController implements Initializable {
     @FXML
     private JFXToggleButton membershipViewChangeBtn;
     String viewChange = "form";
+    String billViewChange = "form";
     int countMembershipViewChangeBtn = 0;
+    int countBillViewChangeBtn = 0;
     @FXML
     private AnchorPane formAnchorPane;
     private AnchorPane membershipTable;
+    private AnchorPane billingTable;
     @FXML
     private JFXTextField height;
     @FXML
@@ -192,6 +195,15 @@ public class MembersFormController implements Initializable {
     private String colorCode;
     @FXML
     private Label mshipLabel;
+    private Label mshipLabel1;
+    @FXML
+    private JFXToggleButton billingViewChangeBtn;
+    @FXML
+    private Label billLabel;
+    @FXML
+    private StackPane billStackPane;
+    @FXML
+    private AnchorPane billFormPane;
 
     /**
      * Initializes the controller class.
@@ -862,6 +874,41 @@ public class MembersFormController implements Initializable {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void billingViewChangeBtnAction(MouseEvent e) {
+        if (billViewChange.equals("form")) {
+            billingViewChangeBtn.setText("Table View");
+            billViewChange = "table";
+            billLabel.setText("B i l l i n g   T a b l e");
+
+            if (e.getClickCount() >= 1) {
+                countBillViewChangeBtn += 1;
+            } else {
+            }
+
+            if (countBillViewChangeBtn <= 1) {
+
+                try {
+                    billingTable = FXMLLoader.load(getClass().getResource("BillingTable.fxml"));
+                    billStackPane.getChildren().add(billingTable);
+
+                } catch (IOException ex) {
+                    Logger.getLogger(MainFrameController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                System.out.println("billingTable added");
+            } else {
+                billingTable.toFront();
+                System.out.println("billingTable to Front");
+            }
+        } else {
+            billingViewChangeBtn.setText("Form View");
+            billViewChange = "form";
+            billLabel.setText("B i l l i n g   D e t a i l s");
+            billFormPane.toFront();
+            System.out.println("billFormPane.toFront");
         }
     }
 
