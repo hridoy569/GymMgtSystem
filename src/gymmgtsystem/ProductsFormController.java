@@ -271,11 +271,11 @@ String sqlDate = purchaseDate.getValue().format(DateTimeFormatter.ofPattern("yyy
     private void getProduct(ActionEvent event) {
          try {
             con = DB.getConnection();
-            String sql = "Select * from product where product_id=? OR product_name=?";
+            String sql = "Select * from product where product_id=?";
             PreparedStatement ps = con.prepareStatement(sql);
             getProductId = productSearch.getText();
             ps.setString(1, getProductId);
-            ps.setString(2, getProductId);
+       
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
