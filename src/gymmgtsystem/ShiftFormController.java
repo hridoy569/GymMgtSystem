@@ -72,7 +72,7 @@ public class ShiftFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        con = DB.getConnection();
+        con = new DB().getConnection();
         loadPackages();
         changeThemeColor();
     }

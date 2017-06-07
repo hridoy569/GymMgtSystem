@@ -216,6 +216,7 @@ public class MainFrameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        con = new DB().getConnection();
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -238,7 +239,6 @@ public class MainFrameController implements Initializable {
         escEvent();
         clock();
         loadBusinessProfile();
-        con = DB.getConnection();
         changeThemeColor();
     }
 
@@ -777,7 +777,6 @@ public class MainFrameController implements Initializable {
 
     private void loadBusinessProfile() {
         try {
-            Connection con = DB.getConnection();
             String sql = "SELECT * FROM business_profile";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -790,8 +789,7 @@ public class MainFrameController implements Initializable {
                 logoFrame.setImage(convertToJavaFXImage);
             }
         } catch (Exception e) {
-            e.printStackTrace();
-        }
+        System.out.println("Can't load business profile from database");        }
     }
 
     private static Image convertToJavaFXImage(byte[] raw, final int width, final int height) {
@@ -816,8 +814,7 @@ public class MainFrameController implements Initializable {
                 vbox2.setStyle("-fx-background-color:"+colorCode);
             }
         } catch (Exception e) {
-            e.printStackTrace();
-        }
+            System.out.println("Can't retrive color code from database");        }
     }
 
 }

@@ -109,7 +109,7 @@ public class InstrumentsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        con = DB.getConnection();
+        con = new DB().getConnection();
         // buildData();
         changeThemeColor();
 
@@ -203,7 +203,7 @@ public class InstrumentsController implements Initializable {
             //SQL FOR SELECTING ALL OF CUSTOMER
             String SQL = "SELECT * from equipment";   						//change table name
             //ResultSet
-            con = DB.getConnection();
+            con = new DB().getConnection();
             ResultSet rs = con.createStatement().executeQuery(SQL);
 
             //* TABLE COLUMN ADDED DYNAMICALLY *
