@@ -96,7 +96,7 @@ public class NewUserController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         ObservableList<String> memberTypeList = FXCollections.observableArrayList("Admin", "User");
         roleCmb.setItems(memberTypeList);
-        con = DB.getConnection();
+        con = new DB().getConnection();
         changeThemeColor();
     }
 

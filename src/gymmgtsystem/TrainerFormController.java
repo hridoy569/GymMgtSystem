@@ -107,7 +107,7 @@ public class TrainerFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODOsdfgszdfsdfsdfsdf
-        con = DB.getConnection();
+        con = new DB().getConnection();
         changeThemeColor();
     }    
 

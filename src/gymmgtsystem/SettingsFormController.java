@@ -116,7 +116,7 @@ public class SettingsFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        con = DB.getConnection();
+        con = new DB().getConnection();
 //        colorPicker.setValue(Color.valueOf("#222"));
         changeThemeColor();
     }

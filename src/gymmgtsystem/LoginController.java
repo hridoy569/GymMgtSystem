@@ -16,6 +16,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
@@ -32,6 +34,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -64,13 +67,25 @@ public class LoginController implements Initializable {
     private Label businessName;
     @FXML
     private ImageView gif;
+    @FXML
+    private StackPane rootStack;
+    private AnchorPane dbconForm;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        con = DB.getConnection();
+        Connection conn = new DB().getConnection();
+        if (conn== null) {
+            try {
+                dbconForm = FXMLLoader.load(getClass().getResource(GymMgtSystem.DBconnect));
+                rootStack.getChildren().add(dbconForm);
+            } catch (IOException ex) {
+                Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+        }
         FadeTransition fadeIn = new FadeTransition(Duration.seconds(1.4), rootPane);
         fadeIn.setFromValue(0);
         fadeIn.setToValue(1);
@@ -114,6 +129,7 @@ public class LoginController implements Initializable {
 
     public void doLogin(ActionEvent event) {
         try {
+            con = new DB().getConnection();
             String roleValue = urole.getSelectionModel().getSelectedItem().toString();
             String sql = "SELECT * FROM user WHERE user_name= ? AND user_password= ?  AND user_role = ? ";
             PreparedStatement ps = con.prepareStatement(sql);
@@ -161,7 +177,7 @@ st.show();
                 businessName.setText(rs.getString("businessName"));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Can't load business profile from database");
         }
     }
 

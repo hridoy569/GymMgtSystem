@@ -112,7 +112,7 @@ public class ProductsFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
       
-        con = DB.getConnection();
+       con = new DB().getConnection();
           buildData();
         changeThemeColor();
         
@@ -194,7 +194,6 @@ public class ProductsFormController implements Initializable {
 String sqlDate = purchaseDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             try {
 
-                con = DB.getConnection();
                 String sql = "INSERT INTO product(product_name, product_type, description, product_size, buying_price, selling_price, quantity, product_code, purchase_date) VALUES(?,?,?,?,?,?,?,?,?) ";
                 PreparedStatement ps = con.prepareStatement(sql);
                 ps.setString(1, productName.getText());
@@ -219,7 +218,6 @@ String sqlDate = purchaseDate.getValue().format(DateTimeFormatter.ofPattern("yyy
 
             try {
 String sqlDate = purchaseDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                con = DB.getConnection();
                 String sql = "UPDATE product SET product_name = ?, product_type =?, description =?, product_size =?, buying_price =?, selling_price =?, quantity=?, product_code =?, purchase_date = ? where product_id=? ";
                 PreparedStatement ps = con.prepareStatement(sql);
                 
@@ -270,7 +268,6 @@ String sqlDate = purchaseDate.getValue().format(DateTimeFormatter.ofPattern("yyy
     @FXML
     private void getProduct(ActionEvent event) {
          try {
-            con = DB.getConnection();
             String sql = "Select * from product where product_id=?";
             PreparedStatement ps = con.prepareStatement(sql);
             getProductId = productSearch.getText();
@@ -307,7 +304,6 @@ String sqlDate = purchaseDate.getValue().format(DateTimeFormatter.ofPattern("yyy
         System.out.println("enter");
         try {
            
-            con = DB.getConnection();
             String sql = "DELETE FROM product where product_id= '"+productSearch.getText()+"'";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.executeUpdate();
@@ -324,7 +320,6 @@ String sqlDate = purchaseDate.getValue().format(DateTimeFormatter.ofPattern("yyy
             //SQL FOR SELECTING ALL OF CUSTOMER
             String SQL = "SELECT * from product";   						//change table name
             //ResultSet
-            con = DB.getConnection();
             ResultSet rs = con.createStatement().executeQuery(SQL);
 
             //* TABLE COLUMN ADDED DYNAMICALLY *

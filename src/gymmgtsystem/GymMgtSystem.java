@@ -14,6 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import util.DB;
 
 /**
  *
@@ -26,11 +27,13 @@ public class GymMgtSystem extends Application {
     public static final String ShiftForm = "/gymmgtsystem/ShiftForm.fxml";
     public static final String PackagesForm = "/gymmgtsystem/PackagesForm.fxml";
     public static final String NewUser = "/gymmgtsystem/NewUser.fxml";
+    public static final String DBconnect = "/util/DBconnect.fxml";
+    Parent root;
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("MainFrame.fxml"));
-        
+        root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+      
         Scene scene = new Scene(root);
         
         stage.setScene(scene);

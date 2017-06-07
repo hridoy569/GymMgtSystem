@@ -78,7 +78,7 @@ public class AllMembersTableController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        con = DB.getConnection();
+        con = new DB().getConnection();
         buildData();
 
         filterInput.textProperty().addListener(new ChangeListener() {

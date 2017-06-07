@@ -75,7 +75,7 @@ public class PackagesFormController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         showPackages();
-        con = DB.getConnection();
+        con = new DB().getConnection();
         changeThemeColor();
     }
 
