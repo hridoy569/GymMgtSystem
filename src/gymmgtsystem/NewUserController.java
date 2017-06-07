@@ -20,7 +20,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -96,7 +95,7 @@ public class NewUserController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         ObservableList<String> memberTypeList = FXCollections.observableArrayList("Admin", "User");
         roleCmb.setItems(memberTypeList);
-        con = new DB().getConnection();
+        con = DB.getConnection();
         changeThemeColor();
     }
 

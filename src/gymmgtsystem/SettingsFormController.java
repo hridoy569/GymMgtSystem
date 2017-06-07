@@ -18,9 +18,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -50,7 +47,6 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javax.imageio.ImageIO;
-import org.controlsfx.control.PropertySheet;
 import util.DB;
 
 /**
@@ -116,7 +112,7 @@ public class SettingsFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        con = new DB().getConnection();
+        con = DB.getConnection();
 //        colorPicker.setValue(Color.valueOf("#222"));
         changeThemeColor();
     }

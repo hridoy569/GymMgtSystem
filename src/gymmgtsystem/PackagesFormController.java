@@ -13,16 +13,10 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javax.swing.JOptionPane;
 import util.DB;
 
 /**
@@ -73,9 +67,8 @@ public class PackagesFormController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        con = DB.getConnection();
         showPackages();
-        con = new DB().getConnection();
         changeThemeColor();
     }
 

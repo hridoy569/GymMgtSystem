@@ -15,7 +15,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Observable;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -109,7 +108,7 @@ public class InstrumentsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        con = new DB().getConnection();
+        con = DB.getConnection();
         // buildData();
         changeThemeColor();
 

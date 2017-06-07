@@ -45,7 +45,7 @@ public class RevenueFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // 
-        con = new DB().getConnection();
+        con = DB.getConnection();
         changeThemeColor();
     }    
 

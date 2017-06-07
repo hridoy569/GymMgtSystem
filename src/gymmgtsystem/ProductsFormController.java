@@ -11,7 +11,6 @@ import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.Date;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -112,7 +111,7 @@ public class ProductsFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
       
-       con = new DB().getConnection();
+       con = DB.getConnection();
           buildData();
         changeThemeColor();
         

@@ -18,13 +18,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import util.DB;
 
@@ -72,7 +68,7 @@ public class ShiftFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        con = new DB().getConnection();
+        con = DB.getConnection();
         loadPackages();
         changeThemeColor();
     }

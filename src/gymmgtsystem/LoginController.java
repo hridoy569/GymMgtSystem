@@ -16,8 +16,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
@@ -30,7 +28,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -76,23 +73,15 @@ public class LoginController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Connection conn = new DB().getConnection();
-        if (conn== null) {
-            try {
-                dbconForm = FXMLLoader.load(getClass().getResource(GymMgtSystem.DBconnect));
-                rootStack.getChildren().add(dbconForm);
-            } catch (IOException ex) {
-                Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
-        }
+        con = DB.getConnection();
+
         FadeTransition fadeIn = new FadeTransition(Duration.seconds(1.4), rootPane);
         fadeIn.setFromValue(0);
         fadeIn.setToValue(1);
         fadeIn.setCycleCount(1);
         fadeIn.play();
-  
-          ObservableList<String> genreList = FXCollections.observableArrayList("Admin", "User");
+
+        ObservableList<String> genreList = FXCollections.observableArrayList("Admin", "User");
         urole.setItems(genreList);
         urole.getSelectionModel().selectFirst();
         loadBusinessProfile();
@@ -123,27 +112,25 @@ public class LoginController implements Initializable {
 
         });
         pauseTransition.play();
-        
 
     }
 
     public void doLogin(ActionEvent event) {
         try {
-            con = new DB().getConnection();
             String roleValue = urole.getSelectionModel().getSelectedItem().toString();
             String sql = "SELECT * FROM user WHERE user_name= ? AND user_password= ?  AND user_role = ? ";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, uname.getText());
             ps.setString(2, upass.getText());
             ps.setString(3, roleValue);
-            
+
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 String name = rs.getString(2);
                 String fullname = rs.getString(3);
                 String email = rs.getString(5);
                 String role = rs.getString(6);
-                
+
                 ((Node) event.getSource()).getScene().getWindow().hide();
                 Stage st = new Stage();
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gymmgtsystem/MainFrame.fxml"));
@@ -158,18 +145,18 @@ public class LoginController implements Initializable {
                 st.setMaximized(true);
                 st.setTitle("Gym Management System");
 //                st.getIcons().add(new Image("/image/icon.png"));
-st.initStyle(StageStyle.UNDECORATED);
-st.show();
+                st.initStyle(StageStyle.UNDECORATED);
+                st.show();
             }
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Login error");
         }
     }
-    
+
     private void loadBusinessProfile() {
         try {
-            
+
             String sql = "SELECT businessName FROM business_profile";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();

@@ -211,7 +211,7 @@ public class MembersFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        con = new DB().getConnection();
+        con = DB.getConnection();
 
         glowMembersBtn();
         ObservableList<String> shapeList = FXCollections.observableArrayList("Lean", "Fat", "Skinny");

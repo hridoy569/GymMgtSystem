@@ -8,7 +8,6 @@ package gymmgtsystem;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
-import com.jfoenix.controls.JFXToggleButton;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,7 +22,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -78,7 +76,7 @@ public class AllMembersTableController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        con = new DB().getConnection();
+        con = DB.getConnection();
         buildData();
 
         filterInput.textProperty().addListener(new ChangeListener() {
