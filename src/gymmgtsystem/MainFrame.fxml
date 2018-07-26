@@ -29,7 +29,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="root" maxHeight="768.0" maxWidth="1366.0" minHeight="768.0" minWidth="1366.0" prefHeight="768.0" prefWidth="1366.0" stylesheets="@../style/scrollBar.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gymmgtsystem.MainFrameController">
+<BorderPane fx:id="root" maxHeight="768.0" maxWidth="1366.0" minHeight="768.0" minWidth="1366.0" prefHeight="768.0" prefWidth="1366.0" stylesheets="@../style/scrollBar.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gymmgtsystem.MainFrameController">
    <center>
       <StackPane fx:id="stackPane" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -57,7 +57,7 @@
                                     <VBox layoutX="20.0" layoutY="213.0" spacing="10.0" AnchorPane.leftAnchor="50.0" />
                                     <AnchorPane layoutX="798.0" layoutY="188.0" maxHeight="471.0" maxWidth="608.0" prefHeight="471.0" prefWidth="608.0" style="-fx-background-color: #F4F4F4;" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="120.0">
                                        <children>
-                                          <Label layoutX="14.0" layoutY="8.0" text="Today's Attandance" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                          <Label layoutX="16.0" layoutY="3.0" text="Today's Attandance" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="3.0">
                                              <font>
                                                 <Font size="25.0" />
                                              </font>
@@ -66,13 +66,11 @@
                                              <children>
                                                 <TableView layoutX="14.0" layoutY="48.0" prefHeight="350.0" prefWidth="537.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="40.0">
                                                    <columns>
-                                                      <TableColumn prefWidth="75.0" text="Column X" />
-                                                      <TableColumn prefWidth="75.0" text="Column X" />
-                                                      <TableColumn prefWidth="75.0" text="Column X" />
-                                                      <TableColumn prefWidth="75.0" text="Column X" />
-                                                      <TableColumn prefWidth="75.0" text="Column X" />
-                                                      <TableColumn prefWidth="75.0" text="Column X" />
-                                                      <TableColumn prefWidth="75.0" text="Column X" />
+                                                      <TableColumn prefWidth="51.0" text="Sl. No." />
+                                                      <TableColumn prefWidth="225.0" text="Name" />
+                                                      <TableColumn prefWidth="76.0" text="Time" />
+                                                      <TableColumn prefWidth="84.0" text="Location" />
+                                                      <TableColumn prefWidth="142.0" text="Remarks" />
                                                    </columns>
                                                 </TableView>
                                                 <JFXToggleButton fx:id="toggleAttStatus" layoutX="433.0" layoutY="-8.0" onMouseClicked="#toggleAttStatusAction" selected="true" text="Logged In" toggleColor="#01a5e1" toggleLineColor="#6dc4e1" unToggleLineColor="#0bb210" AnchorPane.leftAnchor="460.0" AnchorPane.topAnchor="-8.0" />
@@ -270,7 +268,7 @@
                                              </padding>
                                              <children>
                                                 <Label text="                Notes               " />
-                                                <TextArea prefHeight="200.0" prefWidth="200.0" wrapText="true" />
+                                                <TextArea prefHeight="200.0" prefWidth="200.0" text="You can put some notes here...." wrapText="true" />
                                              </children>
                                              <HBox.margin>
                                                 <Insets bottom="7.0" left="5.0" />
